@@ -4,7 +4,6 @@ const route = express.Router();
 
 route.post("/login", (req, res) => {
   const { email, name } = req.body;
-  console.log(email, name, req.body);
   db.query(
     "SELECT * FROM students WHERE email = ?",
     [email],
