@@ -16,6 +16,34 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `classrooms`
+--
+
+DROP TABLE IF EXISTS `classrooms`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `classrooms` (
+  `branchYear` int NOT NULL,
+  `branchName` varchar(50) NOT NULL,
+  `subjectName` varchar(50) NOT NULL,
+  `subjectCode` char(7) NOT NULL,
+  `subGroups` int NOT NULL,
+  `classroomCode` varchar(10) NOT NULL,
+  PRIMARY KEY (`classroomCode`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `classrooms`
+--
+
+LOCK TABLES `classrooms` WRITE;
+/*!40000 ALTER TABLE `classrooms` DISABLE KEYS */;
+INSERT INTO `classrooms` VALUES (2024,'5','Mathematics','CSN-201',2,'s0m3th1ng');
+/*!40000 ALTER TABLE `classrooms` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `students`
 --
 
@@ -76,4 +104,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-03-17 10:51:30
+-- Dump completed on 2021-03-27 22:56:36
