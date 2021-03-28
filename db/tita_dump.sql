@@ -23,14 +23,12 @@ DROP TABLE IF EXISTS `classrooms`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `classrooms` (
-  `branchYear` int NOT NULL,
-  `branchName` varchar(50) NOT NULL,
-  `subjectName` varchar(50) NOT NULL,
-  `subjectCode` char(7) NOT NULL,
-  `subGroups` int NOT NULL,
-  `classroomCode` varchar(10) NOT NULL,
-  PRIMARY KEY (`classroomCode`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `classroom_id` int NOT NULL AUTO_INCREMENT,
+  `course_name` varchar(40) NOT NULL,
+  `course_code` varchar(10) NOT NULL,
+  `num_groups` int NOT NULL,
+  PRIMARY KEY (`classroom_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,7 +37,7 @@ CREATE TABLE `classrooms` (
 
 LOCK TABLES `classrooms` WRITE;
 /*!40000 ALTER TABLE `classrooms` DISABLE KEYS */;
-INSERT INTO `classrooms` VALUES (2024,'5','Mathematics','CSN-201',2,'s0m3th1ng');
+INSERT INTO `classrooms` VALUES (1,'Computer Networks','CSN-210',6);
 /*!40000 ALTER TABLE `classrooms` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -82,7 +80,7 @@ CREATE TABLE `teachers` (
   `email` varchar(150) NOT NULL,
   PRIMARY KEY (`tid`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -91,7 +89,7 @@ CREATE TABLE `teachers` (
 
 LOCK TABLES `teachers` WRITE;
 /*!40000 ALTER TABLE `teachers` DISABLE KEYS */;
-INSERT INTO `teachers` VALUES (1,'Utkarsh Goel','utkarsh@gmail.com');
+INSERT INTO `teachers` VALUES (1,'Utkarsh Goel','utkarsh@gmail.com'),(2,'TiTa Classroom Management System','adm.tita.cms@gmail.com');
 /*!40000 ALTER TABLE `teachers` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -104,4 +102,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-03-27 22:56:36
+-- Dump completed on 2021-03-28 13:49:46
