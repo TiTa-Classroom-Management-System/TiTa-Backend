@@ -2,15 +2,12 @@ const express = require("express");
 const router = express.Router();
 const db = require("../db/db");
 
-// CREATE TABLE classrooms (branchYear INT NOT NULL, branchName VARCHAR(50) NOT NULL, subjectName VARCHAR(50) NOT NULL, subjectCode CHAR(7) NOT NULL, subGroups INT NOT NULL, classroomCode VARCHAR(10) NOT NULL, PRIMARY );
-
-
-router.post("/classroom", async (req, res) =>
+router.post("/create", async (req, res) =>
 {
-    const {branchYear, branchName, subjectName, subjectCode, subGroups} = req.body;
-    const classroomCode = "s0m3th1ng";
-    await db.query("SELECT * FROM classrooms WHERE branchYear = ? AND branchName = ? AND subjectName = ?", 
-                [parseInt(branchYear), branchName, subjectName], (err, results, fields) =>
+    const {subjectName, subjectCode, subGroups} = req.body;
+    let classroom_id = 1;
+    await db.query("SELECT * FROM classrooms where classroom_id = ?", 
+                [parseInt(classroom_id)], (err, results, fields) =>
                 {
                     if(err)
                     {
@@ -18,21 +15,22 @@ router.post("/classroom", async (req, res) =>
                     }
                     if(results.length === 0)
                     {
-                        db.query("INSERT INTO classrooms VALUES (?, ?, ?, ?, ?, ?)", 
-                                    [branchYear, branchName, subjectName, subjectCode, subGroups, classroomCode],
+                        db.query("INSERT INTO classrooms VALUES (?, ?, ?, ?)", 
+                                    [classroom_id, subjectName, subjectCode, subGroups],
                                     (err, results, fields) =>
                                     {
                                         if(err)
                                         {
                                             throw new Error(err);
+                                            return;
                                         }
                                         else
                                         {
                                             res.status(200).send("Created Classroom.");
+                                            return;
                                         }
                                     })
                     }
-                    res.status(200).send();
                 });
 });
 
