@@ -23,12 +23,12 @@ DROP TABLE IF EXISTS `classrooms`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `classrooms` (
-  `classroom_id` int NOT NULL AUTO_INCREMENT,
-  `course_name` varchar(40) NOT NULL,
+  `classroom_id` varchar(10) NOT NULL,
+  `course_name` varchar(50) NOT NULL,
   `course_code` varchar(10) NOT NULL,
   `num_groups` int NOT NULL,
   PRIMARY KEY (`classroom_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -37,7 +37,7 @@ CREATE TABLE `classrooms` (
 
 LOCK TABLES `classrooms` WRITE;
 /*!40000 ALTER TABLE `classrooms` DISABLE KEYS */;
-INSERT INTO `classrooms` VALUES (1,'Computer Networks','CSN-210',6);
+INSERT INTO `classrooms` VALUES ('qwertyuiop','Microprocessors','CSN-200',2);
 /*!40000 ALTER TABLE `classrooms` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -102,4 +102,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-03-28 13:49:46
+-- Dump completed on 2021-03-29 13:41:09
