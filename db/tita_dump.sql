@@ -42,6 +42,32 @@ INSERT INTO `classrooms` VALUES ('asdfghjkl','So High','SH987',3),('qwertyuiop',
 UNLOCK TABLES;
 
 --
+-- Table structure for table `stud_class`
+--
+
+DROP TABLE IF EXISTS `stud_class`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `stud_class` (
+  `sid` int NOT NULL,
+  `sub_class_id` int NOT NULL,
+  KEY `sid` (`sid`),
+  KEY `sub_class_id` (`sub_class_id`),
+  CONSTRAINT `stud_class_ibfk_1` FOREIGN KEY (`sid`) REFERENCES `students` (`sid`),
+  CONSTRAINT `stud_class_ibfk_2` FOREIGN KEY (`sub_class_id`) REFERENCES `sub_class` (`sub_class_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `stud_class`
+--
+
+LOCK TABLES `stud_class` WRITE;
+/*!40000 ALTER TABLE `stud_class` DISABLE KEYS */;
+/*!40000 ALTER TABLE `stud_class` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `students`
 --
 
@@ -95,6 +121,32 @@ INSERT INTO `sub_class` VALUES (5,'asdfghjkl',1),(6,'asdfghjkl',2),(7,'asdfghjkl
 UNLOCK TABLES;
 
 --
+-- Table structure for table `teach_class`
+--
+
+DROP TABLE IF EXISTS `teach_class`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `teach_class` (
+  `tid` int NOT NULL,
+  `sub_class_id` int NOT NULL,
+  KEY `tid` (`tid`),
+  KEY `sub_class_id` (`sub_class_id`),
+  CONSTRAINT `teach_class_ibfk_1` FOREIGN KEY (`tid`) REFERENCES `teachers` (`tid`),
+  CONSTRAINT `teach_class_ibfk_2` FOREIGN KEY (`sub_class_id`) REFERENCES `sub_class` (`sub_class_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `teach_class`
+--
+
+LOCK TABLES `teach_class` WRITE;
+/*!40000 ALTER TABLE `teach_class` DISABLE KEYS */;
+/*!40000 ALTER TABLE `teach_class` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `teachers`
 --
 
@@ -129,4 +181,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-03-29 18:00:45
+-- Dump completed on 2021-03-29 22:15:13
