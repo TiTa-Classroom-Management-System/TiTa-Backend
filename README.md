@@ -94,7 +94,7 @@ Copy this path and add the path to local environment.
 ### Importing SQL data from the Dump file
 If the tables and the data do not show up after running the 'npm run dev' command, follow this alternate method to update the DB:
 
-Open MySQL Workbench &rarr; Click on the the local instance connection already present on the home page &rarr; In the Navigator Pane, under the Mangement heading, click on 'Data Import/Restore' &rarr; Select the 'Import from Self-contained file' radio option and browse for the tita_dump.sql file &rarr; Click on the 'Start Import' button on the bottom right (In case it is hidden by Output panel, just drag the output panel down)
+Open MySQL Workbench &rarr; Click on the the local instance connection already present on the home page &rarr; In the Navigator Pane, under the Mangement heading, click on 'Data Import/Restore' &rarr; Select the 'Import from Self-contained file' radio option and browse for the tita_dump.sql file &rarr; Choose 'tita' from the Default Target Schema &rarr; Click on the 'Start Import' button on the bottom right (In case it is hidden by Output panel, just drag the output panel down)
 
 You can also try running the following command as an alternative (given, you're in the same directory as tita_dump.sql):
 
