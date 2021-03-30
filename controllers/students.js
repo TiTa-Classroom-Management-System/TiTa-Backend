@@ -26,6 +26,17 @@ const login = (req, res) => {
   );
 };
 
-const getTimeTable = (req, res) => {};
+const getTimeTable = (req, res) => {
+  const email = req.params.email;
+  db.query(
+    "SELECT * FROM time_table WHERE sub_class_id IN (SELECT sub_class_id FROM stud_class WHERE sid IN (SELECT sid FROM students WHERE email = ?))",
+    [email],
+    (err, results, fields) => {
+      if (err) throw new Error(err);
+      res.status(200).send(results);
+    }
+  );
+  res.status(400).send();
+};
 
 module.exports = { login, getTimeTable };
