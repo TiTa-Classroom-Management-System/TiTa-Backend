@@ -1,3 +1,5 @@
+const db = require("../db/db");
+
 const login = (req, res) => {
   const { email, name } = req.body;
   db.query(
