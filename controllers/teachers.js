@@ -1,17 +1,16 @@
 const login = (req, res) => {
   const { email, name } = req.body;
   db.query(
-    "SELECT * FROM students WHERE email = ?",
+    "SELECT * FROM teachers WHERE email = ?",
     [email],
     (err, results, fields) => {
       if (err) {
         throw new Error(err);
       }
       if (results.length === 0) {
-        console.log(name.substr(2, 10), name.substr(11), email);
         db.query(
-          "INSERT INTO students (sid, name, email) VALUES (?, ?, ?)",
-          [parseInt(name.substr(2, 10)), name.substr(11), email],
+          "INSERT INTO teachers (name, email) VALUES (?, ?)",
+          [name, email],
           (err, results, fields) => {
             if (err) {
               throw new Error(err);
@@ -29,7 +28,7 @@ const login = (req, res) => {
 const getTimeTable = (req, res) => {
   const email = req.params.email;
   db.query(
-    "SELECT * FROM time_table WHERE sub_class_id IN (SELECT sub_class_id FROM stud_class WHERE sid IN (SELECT sid FROM students WHERE email = ?))",
+    "SELECT * FROM time_table WHERE sub_class_id IN (SELECT sub_class_id FROM teach_class WHERE tid IN (SELECT tid FROM teachers WHERE email = ?))",
     [email],
     (err, results, fields) => {
       if (err) throw new Error(err);
