@@ -37,7 +37,7 @@ CREATE TABLE `classrooms` (
 
 LOCK TABLES `classrooms` WRITE;
 /*!40000 ALTER TABLE `classrooms` DISABLE KEYS */;
-INSERT INTO `classrooms` VALUES ('asdfghjkl','So High','SH987',3),('qwertyuiop','Microprocessors','CSN-200',2);
+INSERT INTO `classrooms` VALUES ('asdfghjft','EAD','CSN207',3),('asdfghjkl','So High','SH987',3),('qwertyuiop','Microprocessors','CSN-200',2);
 /*!40000 ALTER TABLE `classrooms` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -64,6 +64,7 @@ CREATE TABLE `stud_class` (
 
 LOCK TABLES `stud_class` WRITE;
 /*!40000 ALTER TABLE `stud_class` DISABLE KEYS */;
+INSERT INTO `stud_class` VALUES (19103049,6);
 /*!40000 ALTER TABLE `stud_class` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -107,7 +108,7 @@ CREATE TABLE `sub_class` (
   PRIMARY KEY (`sub_class_id`),
   KEY `class_id` (`class_id`),
   CONSTRAINT `sub_class_ibfk_1` FOREIGN KEY (`class_id`) REFERENCES `classrooms` (`classroom_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -116,7 +117,7 @@ CREATE TABLE `sub_class` (
 
 LOCK TABLES `sub_class` WRITE;
 /*!40000 ALTER TABLE `sub_class` DISABLE KEYS */;
-INSERT INTO `sub_class` VALUES (5,'asdfghjkl',1),(6,'asdfghjkl',2),(7,'asdfghjkl',3);
+INSERT INTO `sub_class` VALUES (5,'asdfghjkl',1),(6,'asdfghjkl',2),(7,'asdfghjkl',3),(8,'asdfghjft',1),(9,'asdfghjft',2),(10,'asdfghjft',3);
 /*!40000 ALTER TABLE `sub_class` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -143,6 +144,7 @@ CREATE TABLE `teach_class` (
 
 LOCK TABLES `teach_class` WRITE;
 /*!40000 ALTER TABLE `teach_class` DISABLE KEYS */;
+INSERT INTO `teach_class` VALUES (1,8),(1,9),(1,10);
 /*!40000 ALTER TABLE `teach_class` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -189,7 +191,7 @@ CREATE TABLE `timetable` (
   PRIMARY KEY (`tt_id`),
   KEY `sub_class_id` (`sub_class_id`),
   CONSTRAINT `timetable_ibfk_1` FOREIGN KEY (`sub_class_id`) REFERENCES `sub_class` (`sub_class_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -198,7 +200,7 @@ CREATE TABLE `timetable` (
 
 LOCK TABLES `timetable` WRITE;
 /*!40000 ALTER TABLE `timetable` DISABLE KEYS */;
-INSERT INTO `timetable` VALUES (1,6,'11:00:00','12:00:00','Wednesday','Lecture');
+INSERT INTO `timetable` VALUES (1,6,'11:00:00','12:00:00','Wednesday','Lecture'),(2,6,'12:30:00','01:30:00','Monday','Tutorial'),(3,8,'01:30:00','02:30:00','Tuesday','Tutorial'),(4,9,'01:30:00','02:30:00','Thursday','Lecture');
 /*!40000 ALTER TABLE `timetable` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -211,4 +213,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-03-31 11:13:52
+-- Dump completed on 2021-03-31 19:18:23

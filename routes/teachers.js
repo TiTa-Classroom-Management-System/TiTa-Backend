@@ -4,6 +4,6 @@ const router = express.Router();
 const { login, getTimeTable } = require("../controllers/teachers");
 
 router.post("/login", login);
-router.get("/time_table/:email", getTimeTable);
+router.get("/timetable/:email", getTimeTable);
 
 module.exports = router;
