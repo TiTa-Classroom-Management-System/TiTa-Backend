@@ -78,7 +78,7 @@ const getClassroom=async(req,res)=>{
       if (err) {
         throw new Error(err);
       }
-      res.status(200).send(results);
+      res.status(200).send(results[0]);
     }
   )
   //res.status(400).send();
