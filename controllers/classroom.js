@@ -7,7 +7,7 @@ const createClassRoom = async (req, res) => {
     "SELECT tid FROM teachers where email = ?",
     [email],
     (err, results, fields) => {
-      if (err){
+      if (err) {
         throw new Error(err);
       }
       const tid = results[0].tid;
@@ -26,7 +26,7 @@ const createClassRoom = async (req, res) => {
                 (err, results, fields) => {
                   if (err) {
                     throw new Error(err);
-                  } 
+                  }
                   for (let i = 1; i <= subGroups; i++) {
                     db.query(
                       "INSERT INTO sub_class(class_id,grp_no) VALUES (?,?)",
@@ -39,17 +39,17 @@ const createClassRoom = async (req, res) => {
                           "SELECT sub_class_id FROM sub_class WHERE class_id = ?",
                           [classroom_id],
                           (err, results, fields) => {
-                            if(err) {
+                            if (err) {
                               throw new Error(err);
                             }
                             db.query(
                               "INSERT INTO teach_class(tid, sub_class_id) VALUES (?, ?)",
-                              [tid, results[i-1].sub_class_id],
+                              [tid, results[i - 1].sub_class_id],
                               (err, results, fields) => {
-                                if(err) {
+                                if (err) {
                                   throw new Error(err);
                                 }
-                              } 
+                              }
                             );
                           }
                         );
@@ -69,8 +69,8 @@ const createClassRoom = async (req, res) => {
   );
 };
 
-const getClassroom=async(req,res)=>{
-  const classid=req.params.id;
+const getClassroom = async (req, res) => {
+  const classid = req.params.id;
   db.query(
     "SELECT * FROM classrooms WHERE classroom_id=?",
     [classid],
@@ -80,22 +80,22 @@ const getClassroom=async(req,res)=>{
       }
       res.status(200).send(results[0]);
     }
-  )
+  );
   //res.status(400).send();
-}
+};
 
-const joinClassroom=async(req,res)=>{
-  const {classid,email,selected_grp_no}=req.body;
-  console.log(classid,email,selected_grp_no);
+const joinClassroom = async (req, res) => {
+  const { classid, email, selected_grp_no } = req.body;
+  console.log(classid, email, selected_grp_no);
   db.query(
     "SELECT sub_class_id FROM sub_class WHERE class_id=? AND grp_no=?",
-    [classid,selected_grp_no],
+    [classid, selected_grp_no],
     (err, results, fields) => {
       if (err) {
         throw new Error(err);
       }
-      console.log(results)
-      const sub_class_id=results[0].sub_class_id;
+      console.log(results);
+      const sub_class_id = results[0].sub_class_id;
       db.query(
         "SELECT sid FROM students WHERE email=?",
         [email],
@@ -103,21 +103,21 @@ const joinClassroom=async(req,res)=>{
           if (err) {
             throw new Error(err);
           }
-          const sid=results[0].sid;
+          const sid = results[0].sid;
           db.query(
             "INSERT INTO stud_class VALUES(?,?)",
-            [sid,sub_class_id],
+            [sid, sub_class_id],
             (err, results, fields) => {
-              if(err) {
+              if (err) {
                 throw new Error(err);
               }
               res.status(200).send(results);
             }
-          )
+          );
         }
-      )
+      );
     }
-  )
-}
+  );
+};
 
-module.exports = { createClassRoom ,getClassroom,joinClassroom};
+module.exports = { createClassRoom, getClassroom, joinClassroom };
