@@ -182,14 +182,14 @@ DROP TABLE IF EXISTS `timetable`;
 CREATE TABLE `timetable` (
   `tt_id` int NOT NULL AUTO_INCREMENT,
   `sub_class_id` int DEFAULT NULL,
-  `start_time` datetime DEFAULT NULL,
-  `end_time` datetime DEFAULT NULL,
+  `start_time` time DEFAULT NULL,
+  `end_time` time DEFAULT NULL,
   `day` varchar(10) DEFAULT NULL,
-  `type` enum('Lecture','Practical','Tutorial') DEFAULT NULL,
+  `type` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`tt_id`),
   KEY `sub_class_id` (`sub_class_id`),
   CONSTRAINT `timetable_ibfk_1` FOREIGN KEY (`sub_class_id`) REFERENCES `sub_class` (`sub_class_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -198,6 +198,7 @@ CREATE TABLE `timetable` (
 
 LOCK TABLES `timetable` WRITE;
 /*!40000 ALTER TABLE `timetable` DISABLE KEYS */;
+INSERT INTO `timetable` VALUES (1,6,'11:00:00','12:00:00','Wednesday','Lecture');
 /*!40000 ALTER TABLE `timetable` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -210,4 +211,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-03-30 22:38:28
+-- Dump completed on 2021-03-31 11:13:52
