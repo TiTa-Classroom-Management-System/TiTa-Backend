@@ -1,3 +1,5 @@
+const db = require("../db/db");
+
 const createClassRoom = async (req, res) => {
   const { subjectName, subjectCode, subGroups } = req.body;
   let classroom_id = "asdfghjkl";

@@ -10,6 +10,7 @@ const indexRouter = require("./routes/index");
 const studentRouter = require("./routes/students");
 const teacherRouter = require("./routes/teachers");
 const classroomRouter = require("./routes/classroom");
+const timetableRouter = require("./routes/timetable");
 
 const app = express();
 
@@ -24,5 +25,6 @@ app.use("/", indexRouter);
 app.use("/students", studentRouter);
 app.use("/teachers", teacherRouter);
 app.use("/classroom", classroomRouter);
+app.use("/timetable", timetableRouter);
 
 module.exports = app;
