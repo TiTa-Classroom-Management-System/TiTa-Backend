@@ -1,8 +1,13 @@
 const db = require("../db/db");
+const { customAlphabet } = require("nanoid");
 
 const createClassRoom = async (req, res) => {
   const { subjectName, subjectCode, subGroups, email } = req.body;
-  let classroom_id = "asdfghjft";
+
+  // Classroom Code/ID
+  const nanoid = customAlphabet("abcdefghijklmnopqrstuvwxyz", 8);
+  const classroom_id = nanoid();
+
   db.query(
     "SELECT tid FROM teachers where email = ?",
     [email],
