@@ -64,6 +64,7 @@ CREATE TABLE `stud_class` (
 
 LOCK TABLES `stud_class` WRITE;
 /*!40000 ALTER TABLE `stud_class` DISABLE KEYS */;
+INSERT INTO `stud_class` VALUES (19103057,20);
 /*!40000 ALTER TABLE `stud_class` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -89,7 +90,7 @@ CREATE TABLE `students` (
 
 LOCK TABLES `students` WRITE;
 /*!40000 ALTER TABLE `students` DISABLE KEYS */;
-INSERT INTO `students` VALUES (19103049,'Utkarsh Goel','utkarshgoel.bt19cse@pec.edu.in');
+INSERT INTO `students` VALUES (19103049,'Utkarsh Goel','utkarshgoel.bt19cse@pec.edu.in'),(19103057,'Shubh Ashish','shubhashish.bt19cse@pec.edu.in');
 /*!40000 ALTER TABLE `students` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -190,7 +191,7 @@ CREATE TABLE `timetable` (
   PRIMARY KEY (`tt_id`),
   KEY `sub_class_id` (`sub_class_id`),
   CONSTRAINT `timetable_ibfk_1` FOREIGN KEY (`sub_class_id`) REFERENCES `sub_class` (`sub_class_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -199,6 +200,7 @@ CREATE TABLE `timetable` (
 
 LOCK TABLES `timetable` WRITE;
 /*!40000 ALTER TABLE `timetable` DISABLE KEYS */;
+INSERT INTO `timetable` VALUES (5,20,'11:00:00','12:00:00','Thursday','Lecture'),(6,20,'10:00:00','12:00:00','Saturday','Practical'),(7,19,'15:00:00','17:00:00','Monday','Practical'),(8,19,'11:00:00','12:00:00','Tuesday','Tutorial');
 /*!40000 ALTER TABLE `timetable` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -211,4 +213,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-04-01 11:18:55
+-- Dump completed on 2021-04-03 22:07:15
