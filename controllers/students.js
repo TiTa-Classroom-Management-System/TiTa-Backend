@@ -31,7 +31,7 @@ const login = (req, res) => {
 const getTimeTable = (req, res) => {
   const email = req.params.email;
   db.query(
-    "select tt_id, start_time, end_time, day, type, course_name, course_code from timetable t join (select sub_class_id, course_name, course_code from sub_class s join classrooms c on s.class_id = c.classroom_id where sub_class_id in (select sub_class_id from stud_class where sid in (select sid from students where email = ?))) u on t.sub_class_id = u.sub_class_id;",
+    "SELECT tt_id, start_time, end_time, day, type, course_name, course_code FROM timetable t JOIN (SELECT sub_class_id, course_name, course_code FROM sub_class s JOIN classrooms c ON s.class_id = c.classroom_id WHERE sub_class_id IN (SELECT sub_class_id FROM stud_class WHERE sid IN (SELECT sid FROM students WHERE email = ?))) u ON t.sub_class_id = u.sub_class_id;",
     [email],
     (err, results, fields) => {
       if (err) throw new Error(err);
