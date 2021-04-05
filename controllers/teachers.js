@@ -30,14 +30,13 @@ const login = (req, res) => {
 const getTimeTable = (req, res) => {
   const email = req.params.email;
   db.query(
-    "SELECT * FROM time_table WHERE sub_class_id IN (SELECT sub_class_id FROM teach_class WHERE tid IN (SELECT tid FROM teachers WHERE email = ?))",
+    "SELECT * FROM timetable WHERE sub_class_id IN (SELECT sub_class_id FROM teach_class WHERE tid IN (SELECT tid FROM teachers WHERE email = ?))",
     [email],
     (err, results, fields) => {
       if (err) throw new Error(err);
       res.status(200).send(results);
     }
   );
-  res.status(400).send();
 };
 
 module.exports = { login, getTimeTable };
