@@ -27,6 +27,8 @@ CREATE TABLE `classrooms` (
   `course_name` varchar(50) NOT NULL,
   `course_code` varchar(10) NOT NULL,
   `num_groups` int NOT NULL,
+  `branchName` varchar(50) DEFAULT NULL,
+  `branchYear` int DEFAULT NULL,
   PRIMARY KEY (`classroom_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -37,7 +39,7 @@ CREATE TABLE `classrooms` (
 
 LOCK TABLES `classrooms` WRITE;
 /*!40000 ALTER TABLE `classrooms` DISABLE KEYS */;
-INSERT INTO `classrooms` VALUES ('uupntlro','Test Subject','TEST-123',2);
+INSERT INTO `classrooms` VALUES ('egneirnj','Bakchodi-Advanced','BAK-069',1,'MechE',2020),('uupntlro','Test Subject','TEST-123',2,'CSE',2019);
 /*!40000 ALTER TABLE `classrooms` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -108,7 +110,7 @@ CREATE TABLE `sub_class` (
   PRIMARY KEY (`sub_class_id`),
   KEY `class_id` (`class_id`),
   CONSTRAINT `sub_class_ibfk_1` FOREIGN KEY (`class_id`) REFERENCES `classrooms` (`classroom_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -117,7 +119,7 @@ CREATE TABLE `sub_class` (
 
 LOCK TABLES `sub_class` WRITE;
 /*!40000 ALTER TABLE `sub_class` DISABLE KEYS */;
-INSERT INTO `sub_class` VALUES (19,'uupntlro',1),(20,'uupntlro',2);
+INSERT INTO `sub_class` VALUES (19,'uupntlro',1),(20,'uupntlro',2),(24,'egneirnj',1);
 /*!40000 ALTER TABLE `sub_class` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -144,7 +146,7 @@ CREATE TABLE `teach_class` (
 
 LOCK TABLES `teach_class` WRITE;
 /*!40000 ALTER TABLE `teach_class` DISABLE KEYS */;
-INSERT INTO `teach_class` VALUES (2,19),(2,20);
+INSERT INTO `teach_class` VALUES (2,19),(2,20),(2,24);
 /*!40000 ALTER TABLE `teach_class` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -161,7 +163,7 @@ CREATE TABLE `teachers` (
   `email` varchar(150) NOT NULL,
   PRIMARY KEY (`tid`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -170,7 +172,7 @@ CREATE TABLE `teachers` (
 
 LOCK TABLES `teachers` WRITE;
 /*!40000 ALTER TABLE `teachers` DISABLE KEYS */;
-INSERT INTO `teachers` VALUES (1,'Utkarsh Goel','utkarsh@gmail.com'),(2,'TiTa Classroom Management System','adm.tita.cms@gmail.com'),(3,'Taranjot Singh','taranjotsfeb2001@gmail.com');
+INSERT INTO `teachers` VALUES (1,'Utkarsh Goel','utkarsh@gmail.com'),(2,'TiTa Classroom Management System','adm.tita.cms@gmail.com'),(3,'Taranjot Singh','taranjotsfeb2001@gmail.com'),(4,'Shubh Ashish','ashishshubh001@gmail.com');
 /*!40000 ALTER TABLE `teachers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -213,4 +215,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-04-03 22:07:15
+-- Dump completed on 2021-04-06 15:48:39
