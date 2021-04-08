@@ -39,7 +39,7 @@ CREATE TABLE `classrooms` (
 
 LOCK TABLES `classrooms` WRITE;
 /*!40000 ALTER TABLE `classrooms` DISABLE KEYS */;
-INSERT INTO `classrooms` VALUES ('egneirnj','Bakchodi-Advanced','BAK-069',1,'MechE',2020),('uupntlro','Test Subject','TEST-123',2,'CSE',2019);
+INSERT INTO `classrooms` VALUES ('egneirnj','Bakchodi-Advanced','BAK-069',1,'MechE',2020),('rtmfjzno','OS','CSN209',2,'CSE',2019),('uupntlro','Test Subject','TEST-123',2,'CSE',2019);
 /*!40000 ALTER TABLE `classrooms` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -66,7 +66,7 @@ CREATE TABLE `stud_class` (
 
 LOCK TABLES `stud_class` WRITE;
 /*!40000 ALTER TABLE `stud_class` DISABLE KEYS */;
-INSERT INTO `stud_class` VALUES (19103057,20);
+INSERT INTO `stud_class` VALUES (19103057,20),(19103006,24),(19103006,26);
 /*!40000 ALTER TABLE `stud_class` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -92,7 +92,7 @@ CREATE TABLE `students` (
 
 LOCK TABLES `students` WRITE;
 /*!40000 ALTER TABLE `students` DISABLE KEYS */;
-INSERT INTO `students` VALUES (19103049,'Utkarsh Goel','utkarshgoel.bt19cse@pec.edu.in'),(19103057,'Shubh Ashish','shubhashish.bt19cse@pec.edu.in');
+INSERT INTO `students` VALUES (19103006,'Puneet Bansal','puneetbansal.bt19cse@pec.edu.in'),(19103049,'Utkarsh Goel','utkarshgoel.bt19cse@pec.edu.in'),(19103057,'Shubh Ashish','shubhashish.bt19cse@pec.edu.in');
 /*!40000 ALTER TABLE `students` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -110,7 +110,7 @@ CREATE TABLE `sub_class` (
   PRIMARY KEY (`sub_class_id`),
   KEY `class_id` (`class_id`),
   CONSTRAINT `sub_class_ibfk_1` FOREIGN KEY (`class_id`) REFERENCES `classrooms` (`classroom_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -119,7 +119,7 @@ CREATE TABLE `sub_class` (
 
 LOCK TABLES `sub_class` WRITE;
 /*!40000 ALTER TABLE `sub_class` DISABLE KEYS */;
-INSERT INTO `sub_class` VALUES (19,'uupntlro',1),(20,'uupntlro',2),(24,'egneirnj',1);
+INSERT INTO `sub_class` VALUES (19,'uupntlro',1),(20,'uupntlro',2),(24,'egneirnj',1),(25,'rtmfjzno',1),(26,'rtmfjzno',2);
 /*!40000 ALTER TABLE `sub_class` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -146,7 +146,7 @@ CREATE TABLE `teach_class` (
 
 LOCK TABLES `teach_class` WRITE;
 /*!40000 ALTER TABLE `teach_class` DISABLE KEYS */;
-INSERT INTO `teach_class` VALUES (2,19),(2,20),(2,24);
+INSERT INTO `teach_class` VALUES (2,19),(2,20),(2,24),(5,25),(5,26);
 /*!40000 ALTER TABLE `teach_class` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -163,7 +163,7 @@ CREATE TABLE `teachers` (
   `email` varchar(150) NOT NULL,
   PRIMARY KEY (`tid`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -172,7 +172,7 @@ CREATE TABLE `teachers` (
 
 LOCK TABLES `teachers` WRITE;
 /*!40000 ALTER TABLE `teachers` DISABLE KEYS */;
-INSERT INTO `teachers` VALUES (1,'Utkarsh Goel','utkarsh@gmail.com'),(2,'TiTa Classroom Management System','adm.tita.cms@gmail.com'),(3,'Taranjot Singh','taranjotsfeb2001@gmail.com'),(4,'Shubh Ashish','ashishshubh001@gmail.com');
+INSERT INTO `teachers` VALUES (1,'Utkarsh Goel','utkarsh@gmail.com'),(2,'TiTa Classroom Management System','adm.tita.cms@gmail.com'),(3,'Taranjot Singh','taranjotsfeb2001@gmail.com'),(4,'Shubh Ashish','ashishshubh001@gmail.com'),(5,'Puneet Bansal','puneetbansal15801@gmail.com');
 /*!40000 ALTER TABLE `teachers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -215,4 +215,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-04-06 15:48:39
+-- Dump completed on 2021-04-08 14:47:29
