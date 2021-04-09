@@ -40,4 +40,16 @@ const getTimeTable = (req, res) => {
   );
 };
 
-module.exports = { login, getTimeTable };
+const getClassrooms = (req, res) => {
+  const email = req.params.email;
+  db.query(
+    "select M.name, N.class_id, N.grp_no, N.course_name, N.course_code from (select A.name, sub_class_id from (select * from teachers where teachers.tid in (select tid from teach_class where sub_class_id in (select sub_class_id from stud_class where stud_class.sid in (select sid from students where email = ?)))) A join (select * from teach_class where sub_class_id in (select sub_class_id from stud_class where stud_class.sid in (select sid from students where email = ?))) B on A.tid = B.tid) M join (select * from (select * from sub_class where sub_class.sub_class_id in (select sub_class_id from stud_class where stud_class.sid in (select sid from students where email = ?))) X join (select * from classrooms where classroom_id in (select class_id from sub_class where sub_class_id in (select sub_class_id from stud_class where stud_class.sid in (select sid from students where email = ?)))) Y on X.class_id = Y.classroom_id) N on M.sub_class_id = N.sub_class_id",
+    [email, email, email, email],
+    (err, results, fields) => {
+      if(err) throw new Error(err);
+      res.status(200).send(results);
+    }
+  );
+};
+
+module.exports = { login, getTimeTable, getClassrooms };
