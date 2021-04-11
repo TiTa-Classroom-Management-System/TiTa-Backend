@@ -39,4 +39,16 @@ const getTimeTable = (req, res) => {
   );
 };
 
-module.exports = { login, getTimeTable };
+const getClassrooms = (req, res) => {
+  const email = req.params.email;
+  db.query(
+    "select classroom_id, course_name, course_code, branchName, branchYear from classrooms where classroom_id in (select class_id from sub_class where sub_class_id in (select sub_class_id from teach_class where tid in (select tid from teachers where email = ?)))",
+    [email],
+    (err, results, fields) => {
+      if(err) throw new Error(err);
+      res.status(200).send(results);
+    }
+  );
+};
+
+module.exports = { login, getTimeTable, getClassrooms };

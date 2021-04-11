@@ -75,7 +75,7 @@ const createClassRoom = async (req, res) => {
                       }
                     );
                   }
-                  res.status(200).send(results);
+                  res.status(200).send(classroom_id);
                 }
               );
             } catch (err) {
