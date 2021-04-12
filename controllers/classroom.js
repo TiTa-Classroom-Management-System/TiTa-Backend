@@ -2,7 +2,14 @@ const db = require("../db/db");
 const { customAlphabet } = require("nanoid");
 
 const createClassRoom = async (req, res) => {
-  const { subjectName, subjectCode, subGroups, email, branchName, branchYear } = req.body;
+  const {
+    subjectName,
+    subjectCode,
+    subGroups,
+    email,
+    branchName,
+    branchYear,
+  } = req.body;
 
   // Classroom Code/ID
   const nanoid = customAlphabet("abcdefghijklmnopqrstuvwxyz", 8);
@@ -27,7 +34,14 @@ const createClassRoom = async (req, res) => {
             try {
               db.query(
                 "INSERT INTO classrooms VALUES (?, ?, ?, ?, ?, ?)",
-                [classroom_id, subjectName, subjectCode, subGroups, branchName, branchYear],
+                [
+                  classroom_id,
+                  subjectName,
+                  subjectCode,
+                  subGroups,
+                  branchName,
+                  branchYear,
+                ],
                 (err, results, fields) => {
                   if (err) {
                     throw new Error(err);

@@ -35,7 +35,7 @@ const getTimeTable = (req, res) => {
     [email],
     (err, results, fields) => {
       if (err) throw new Error(err);
-      res.status(200).send(results);  
+      res.status(200).send(results);
     }
   );
 };
