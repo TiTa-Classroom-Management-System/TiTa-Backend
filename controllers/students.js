@@ -31,7 +31,32 @@ const login = (req, res) => {
 const getTimeTable = (req, res) => {
   const email = req.params.email;
   db.query(
-    "SELECT class_id, tt_id, start_time, end_time, day, type, course_name, course_code FROM timetable t JOIN (SELECT class_id, sub_class_id, course_name, course_code FROM sub_class s JOIN classrooms c ON s.class_id = c.classroom_id WHERE sub_class_id IN (SELECT sub_class_id FROM stud_class WHERE sid IN (SELECT sid FROM students WHERE email = ?))) u ON t.sub_class_id = u.sub_class_id;",
+    `SELECT
+      class_id,
+      tt_id,
+      start_time,
+      end_time,
+      day,
+      type,
+      course_name,
+      course_code
+    FROM timetable t
+    JOIN (SELECT
+      class_id,
+      sub_class_id,
+      course_name,
+      course_code
+    FROM sub_class s
+    JOIN classrooms c
+      ON s.class_id = c.classroom_id
+    WHERE sub_class_id IN (SELECT
+      sub_class_id
+    FROM stud_class
+    WHERE sid IN (SELECT
+      sid
+    FROM students
+    WHERE email = ?))) u
+      ON t.sub_class_id = u.sub_class_id`,
     [email],
     (err, results, fields) => {
       if (err) throw new Error(err);
@@ -43,7 +68,66 @@ const getTimeTable = (req, res) => {
 const getClassrooms = (req, res) => {
   const email = req.params.email;
   db.query(
-    "select M.name, N.class_id, N.grp_no, N.course_name, N.course_code from (select A.name, sub_class_id from (select * from teachers where teachers.tid in (select tid from teach_class where sub_class_id in (select sub_class_id from stud_class where stud_class.sid in (select sid from students where email = ?)))) A join (select * from teach_class where sub_class_id in (select sub_class_id from stud_class where stud_class.sid in (select sid from students where email = ?))) B on A.tid = B.tid) M join (select * from (select * from sub_class where sub_class.sub_class_id in (select sub_class_id from stud_class where stud_class.sid in (select sid from students where email = ?))) X join (select * from classrooms where classroom_id in (select class_id from sub_class where sub_class_id in (select sub_class_id from stud_class where stud_class.sid in (select sid from students where email = ?)))) Y on X.class_id = Y.classroom_id) N on M.sub_class_id = N.sub_class_id",
+    `SELECT
+      M.name,
+      N.class_id,
+      N.grp_no,
+      N.course_name,
+      N.course_code
+    FROM (SELECT
+      A.name,
+      sub_class_id
+    FROM (SELECT
+      *
+    FROM teachers
+    WHERE teachers.tid IN (SELECT
+      tid
+    FROM teach_class
+    WHERE sub_class_id IN (SELECT
+      sub_class_id
+    FROM stud_class
+    WHERE stud_class.sid IN (SELECT
+      sid
+    FROM students
+    WHERE email = ?)))) A
+    JOIN (SELECT
+      *
+    FROM teach_class
+    WHERE sub_class_id IN (SELECT
+      sub_class_id
+    FROM stud_class
+    WHERE stud_class.sid IN (SELECT
+      sid
+    FROM students
+    WHERE email = ?))) B
+      ON A.tid = B.tid) M
+    JOIN (SELECT
+      *
+    FROM (SELECT
+      *
+    FROM sub_class
+    WHERE sub_class.sub_class_id IN (SELECT
+      sub_class_id
+    FROM stud_class
+    WHERE stud_class.sid IN (SELECT
+      sid
+    FROM students
+    WHERE email = ?))) X
+    JOIN (SELECT
+      *
+    FROM classrooms
+    WHERE classroom_id IN (SELECT
+      class_id
+    FROM sub_class
+    WHERE sub_class_id IN (SELECT
+      sub_class_id
+    FROM stud_class
+    WHERE stud_class.sid IN (SELECT
+      sid
+    FROM students
+    WHERE email = ?)))) Y
+      ON X.class_id = Y.classroom_id) N
+      ON M.sub_class_id = N.sub_class_id`,
     [email, email, email, email],
     (err, results, fields) => {
       if(err) throw new Error(err);
