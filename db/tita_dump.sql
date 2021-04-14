@@ -44,6 +44,58 @@ INSERT INTO `classrooms` VALUES ('egneirnj','Bakchodi-Advanced','BAK-069',1,'Mec
 UNLOCK TABLES;
 
 --
+-- Table structure for table `quiz_subclass`
+--
+
+DROP TABLE IF EXISTS `quiz_subclass`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `quiz_subclass` (
+  `quiz_id` int DEFAULT NULL,
+  `sub_class_id` int DEFAULT NULL,
+  KEY `quiz_id` (`quiz_id`),
+  KEY `sub_class_id` (`sub_class_id`),
+  CONSTRAINT `quiz_subclass_ibfk_1` FOREIGN KEY (`quiz_id`) REFERENCES `quizzes` (`quiz_id`),
+  CONSTRAINT `quiz_subclass_ibfk_2` FOREIGN KEY (`sub_class_id`) REFERENCES `sub_class` (`sub_class_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `quiz_subclass`
+--
+
+LOCK TABLES `quiz_subclass` WRITE;
+/*!40000 ALTER TABLE `quiz_subclass` DISABLE KEYS */;
+/*!40000 ALTER TABLE `quiz_subclass` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `quizzes`
+--
+
+DROP TABLE IF EXISTS `quizzes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `quizzes` (
+  `quiz_id` int NOT NULL AUTO_INCREMENT,
+  `quiz_name` varchar(50) DEFAULT NULL,
+  `start_time` time DEFAULT NULL,
+  `end_time` time DEFAULT NULL,
+  `quiz_link` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`quiz_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `quizzes`
+--
+
+LOCK TABLES `quizzes` WRITE;
+/*!40000 ALTER TABLE `quizzes` DISABLE KEYS */;
+/*!40000 ALTER TABLE `quizzes` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `stud_class`
 --
 
@@ -215,4 +267,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-04-08 14:47:29
+-- Dump completed on 2021-04-14 11:33:20
