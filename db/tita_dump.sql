@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.23, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.22, for Win64 (x86_64)
 --
 -- Host: localhost    Database: tita
 -- ------------------------------------------------------
--- Server version	8.0.23
+-- Server version	8.0.22
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -14,6 +14,60 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `assignment`
+--
+
+DROP TABLE IF EXISTS `assignment`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `assignment` (
+  `assignment_id` int NOT NULL AUTO_INCREMENT,
+  `assignment_name` varchar(50) NOT NULL,
+  `creation_date` datetime NOT NULL,
+  `submission_date` datetime NOT NULL,
+  `assignment_link` varchar(150) NOT NULL,
+  PRIMARY KEY (`assignment_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `assignment`
+--
+
+LOCK TABLES `assignment` WRITE;
+/*!40000 ALTER TABLE `assignment` DISABLE KEYS */;
+INSERT INTO `assignment` VALUES (1,'CPU Scheduling','2021-04-11 13:23:44','2021-04-20 12:00:00','https://docs.google.com/forms/d/e/1FAIpQLSfmiSooCOZGveysh7QQJCkd7Us1WSdY4ybaSAZV3ln7o6XNug/viewform?usp=sf_link'),(2,'Threads','2021-04-15 13:23:44','2021-04-25 12:00:00','https://docs.google.com/forms/d/e/abcde'),(3,'Threads and stuff','2021-04-15 13:23:44','2021-04-25 12:00:00','https://docs.google.com/forms/d/e/fghi'),(4,'Threads and more','2021-04-15 13:23:44','2021-04-25 12:00:00','https://docs.google.com/forms/d/e/pqrs'),(5,'Threads and more','2021-04-15 13:23:44','2021-04-25 12:00:00','https://docs.google.com/forms/d/e/pqrstuv'),(6,'Threads and more','2021-04-15 13:23:44','2021-04-25 12:00:00','https://docs.google.com/forms/d/e/pqrstuvwxyz'),(7,'Threads and more','2021-04-15 13:23:44','2021-04-25 12:00:00','https://docs.google.com/forms/d/e/pqrstuvwxyz'),(8,'Threads and more','2021-04-15 13:23:44','2021-04-25 12:00:00','https://docs.google.com/forms/d/e/pqrstuvwxyz');
+/*!40000 ALTER TABLE `assignment` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `assignment_subclass`
+--
+
+DROP TABLE IF EXISTS `assignment_subclass`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `assignment_subclass` (
+  `assignment_id` int NOT NULL,
+  `sub_class_id` int NOT NULL,
+  KEY `assignment_id` (`assignment_id`),
+  KEY `sub_class_id` (`sub_class_id`),
+  CONSTRAINT `assignment_subclass_ibfk_1` FOREIGN KEY (`assignment_id`) REFERENCES `assignment` (`assignment_id`),
+  CONSTRAINT `assignment_subclass_ibfk_2` FOREIGN KEY (`sub_class_id`) REFERENCES `sub_class` (`sub_class_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `assignment_subclass`
+--
+
+LOCK TABLES `assignment_subclass` WRITE;
+/*!40000 ALTER TABLE `assignment_subclass` DISABLE KEYS */;
+INSERT INTO `assignment_subclass` VALUES (6,24);
+/*!40000 ALTER TABLE `assignment_subclass` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `classrooms`
@@ -41,6 +95,34 @@ LOCK TABLES `classrooms` WRITE;
 /*!40000 ALTER TABLE `classrooms` DISABLE KEYS */;
 INSERT INTO `classrooms` VALUES ('egneirnj','Bakchodi-Advanced','BAK-069',1,'MechE',2020),('rtmfjzno','OS','CSN209',2,'CSE',2019),('uupntlro','Test Subject','TEST-123',2,'CSE',2019);
 /*!40000 ALTER TABLE `classrooms` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `stud_assignment`
+--
+
+DROP TABLE IF EXISTS `stud_assignment`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `stud_assignment` (
+  `assignment_id` int NOT NULL,
+  `assignment_link` varchar(150) NOT NULL,
+  `sid` int NOT NULL,
+  `submiited_at` datetime DEFAULT NULL,
+  KEY `assignment_id` (`assignment_id`),
+  KEY `sid` (`sid`),
+  CONSTRAINT `stud_assignment_ibfk_1` FOREIGN KEY (`assignment_id`) REFERENCES `assignment` (`assignment_id`),
+  CONSTRAINT `stud_assignment_ibfk_2` FOREIGN KEY (`sid`) REFERENCES `students` (`sid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `stud_assignment`
+--
+
+LOCK TABLES `stud_assignment` WRITE;
+/*!40000 ALTER TABLE `stud_assignment` DISABLE KEYS */;
+/*!40000 ALTER TABLE `stud_assignment` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -215,4 +297,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-04-08 18:56:56
+-- Dump completed on 2021-04-15 20:52:52

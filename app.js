@@ -11,6 +11,8 @@ const studentRouter = require("./routes/students");
 const teacherRouter = require("./routes/teachers");
 const classroomRouter = require("./routes/classroom");
 const timetableRouter = require("./routes/timetable");
+const quizRouter = require("./routes/quiz");
+const assignmentRouter=require("./routes/assignment");
 
 const app = express();
 
@@ -26,5 +28,7 @@ app.use("/students", studentRouter);
 app.use("/teachers", teacherRouter);
 app.use("/classroom", classroomRouter);
 app.use("/timetable", timetableRouter);
+app.use("/quiz", quizRouter);
+app.use("/assignment",assignmentRouter);
 
 module.exports = app;
