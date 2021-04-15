@@ -52,4 +52,16 @@ const getClassrooms = (req, res) => {
   );
 };
 
-module.exports = { login, getTimeTable, getClassrooms };
+const getQuiz = (req, res) => {
+  const email = req.params.email;
+  db.query(
+    "SELECT quiz_name, start_time, end_time, quiz_link FROM quizzes WHERE quiz_id IN (SELECT quiz_id FROM quiz_subclass WHERE sub_class_id IN (SELECT sub_class_id FROM stud_class WHERE sid IN (SELECT sid FROM students WHERE email = ? )))",
+    [email],
+    (err, results, fields) => {
+      if(err) throw new Error(err);
+      res.status(200).send(results);
+    }
+  );
+};
+
+module.exports = { login, getTimeTable, getClassrooms, getQuiz };
