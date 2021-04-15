@@ -29,7 +29,7 @@ CREATE TABLE `assignment` (
   `submission_date` datetime NOT NULL,
   `assignment_link` varchar(150) NOT NULL,
   PRIMARY KEY (`assignment_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,6 +38,7 @@ CREATE TABLE `assignment` (
 
 LOCK TABLES `assignment` WRITE;
 /*!40000 ALTER TABLE `assignment` DISABLE KEYS */;
+INSERT INTO `assignment` VALUES (1,'CPU Scheduling','2021-04-11 13:23:44','2021-04-20 12:00:00','https://docs.google.com/forms/d/e/1FAIpQLSfmiSooCOZGveysh7QQJCkd7Us1WSdY4ybaSAZV3ln7o6XNug/viewform?usp=sf_link'),(2,'Threads','2021-04-15 13:23:44','2021-04-25 12:00:00','https://docs.google.com/forms/d/e/abcde'),(3,'Threads and stuff','2021-04-15 13:23:44','2021-04-25 12:00:00','https://docs.google.com/forms/d/e/fghi'),(4,'Threads and more','2021-04-15 13:23:44','2021-04-25 12:00:00','https://docs.google.com/forms/d/e/pqrs'),(5,'Threads and more','2021-04-15 13:23:44','2021-04-25 12:00:00','https://docs.google.com/forms/d/e/pqrstuv'),(6,'Threads and more','2021-04-15 13:23:44','2021-04-25 12:00:00','https://docs.google.com/forms/d/e/pqrstuvwxyz'),(7,'Threads and more','2021-04-15 13:23:44','2021-04-25 12:00:00','https://docs.google.com/forms/d/e/pqrstuvwxyz'),(8,'Threads and more','2021-04-15 13:23:44','2021-04-25 12:00:00','https://docs.google.com/forms/d/e/pqrstuvwxyz');
 /*!40000 ALTER TABLE `assignment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -64,6 +65,7 @@ CREATE TABLE `assignment_subclass` (
 
 LOCK TABLES `assignment_subclass` WRITE;
 /*!40000 ALTER TABLE `assignment_subclass` DISABLE KEYS */;
+INSERT INTO `assignment_subclass` VALUES (6,24);
 /*!40000 ALTER TABLE `assignment_subclass` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -294,4 +296,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-04-14 14:30:24
+-- Dump completed on 2021-04-15 20:03:48
