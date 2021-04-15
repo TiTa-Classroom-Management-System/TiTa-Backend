@@ -104,7 +104,8 @@ const getClassrooms = (req, res) => {
       course_name,
       course_code,
       branchName,
-      branchYear
+      branchYear,
+      num_groups
     FROM classrooms
     WHERE classroom_id IN (SELECT
       class_id
