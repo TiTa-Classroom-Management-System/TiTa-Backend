@@ -44,6 +44,60 @@ INSERT INTO `classrooms` VALUES ('egneirnj','Bakchodi-Advanced','BAK-069',1,'Mec
 UNLOCK TABLES;
 
 --
+-- Table structure for table `quiz_subclass`
+--
+
+DROP TABLE IF EXISTS `quiz_subclass`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `quiz_subclass` (
+  `quiz_id` int NOT NULL,
+  `sub_class_id` int NOT NULL,
+  KEY `quiz_id` (`quiz_id`),
+  KEY `sub_class_id` (`sub_class_id`),
+  CONSTRAINT `quiz_subclass_ibfk_1` FOREIGN KEY (`quiz_id`) REFERENCES `quizzes` (`quiz_id`),
+  CONSTRAINT `quiz_subclass_ibfk_2` FOREIGN KEY (`sub_class_id`) REFERENCES `sub_class` (`sub_class_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `quiz_subclass`
+--
+
+LOCK TABLES `quiz_subclass` WRITE;
+/*!40000 ALTER TABLE `quiz_subclass` DISABLE KEYS */;
+INSERT INTO `quiz_subclass` VALUES (1,19),(1,20),(2,26);
+/*!40000 ALTER TABLE `quiz_subclass` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `quizzes`
+--
+
+DROP TABLE IF EXISTS `quizzes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `quizzes` (
+  `quiz_id` int NOT NULL AUTO_INCREMENT,
+  `quiz_name` varchar(50) NOT NULL,
+  `start_time` time NOT NULL,
+  `end_time` time NOT NULL,
+  `quiz_link` varchar(100) NOT NULL,
+  PRIMARY KEY (`quiz_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `quizzes`
+--
+
+LOCK TABLES `quizzes` WRITE;
+/*!40000 ALTER TABLE `quizzes` DISABLE KEYS */;
+INSERT INTO `quizzes` VALUES (1,'SQL','11:00:00','11:15:00','docs.google.com/quiz/link'),(2,'SQL','12:00:00','12:15:00','docs.google.com/quiz/link2');
+/*!40000 ALTER TABLE `quizzes` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `stud_class`
 --
 
@@ -215,4 +269,5 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-04-08 18:56:56
+
+-- Dump completed on 2021-04-14 22:59:39
