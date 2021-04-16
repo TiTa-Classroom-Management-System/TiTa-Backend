@@ -3,7 +3,6 @@ const router=express.Router();
 
 const{upload}=require("../controllers/cloudinary");
 
-router.post('/uploadimages',authCheck,adminCheck,upload);
-router.post('/removeimage',authCheck,adminCheck,remove)
+router.post('/uploadFile',upload);
 
 module.exports=router;
