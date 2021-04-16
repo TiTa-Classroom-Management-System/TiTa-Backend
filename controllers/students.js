@@ -149,10 +149,10 @@ const getQuiz = (req, res) => {
 };
 
 const getAssignment = (req, res) => {
-  const email = req.params.email;
+  const classroom_id = req.params.classroom_id;
   db.query(
-    "SELECT assignment_name, creation_date, submission_date, assignment_link FROM assignments WHERE assignment_id IN (SELECT assignment_id FROM assignment_subclass WHERE sub_class_id IN (SELECT sub_class_id FROM stud_class WHERE sid IN (SELECT sid FROM students WHERE email = ? )))",
-    [email],
+    "SELECT assignment_name, creation_date, submission_date, assignment_link FROM assignments WHERE assignment_id IN (SELECT assignment_id FROM assignment_subclass WHERE sub_class_id = ? )",
+    [classroom_id],
     (err, results, fields) => {
       if(err) throw new Error(err);
       res.status(200).send(results);

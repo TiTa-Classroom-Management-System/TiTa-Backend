@@ -1,9 +1,16 @@
 const db = require("../db/db");
 
-const createAssignment=(req,res)=>{
-    const {assignment_name,creation_date,submission_date,assignment_link,classroom_id,subGroups}=req.body;
+const{upload}=require("../controllers/cloudinary");
 
-    db.query(
+const createAssignment=async (req,res)=>{
+    const {assignment_name,creation_date,submission_date,classroom_id,subGroups}=req.body;
+    console.log(req.files)
+    const{assignment_file}=req.files;
+    console.log(assignment_file,assignment_name)
+    upload(req,res,assignment_file)
+    .then((res) => {
+        const assignment_link=res.data.url;
+        db.query(
         "INSERT INTO assignment (assignment_name,creation_date,submission_date,assignment_link) VALUES (?, ?, ?, ?)",
         [assignment_name,creation_date,submission_date,assignment_link],
         (err, results, fields) => {
@@ -44,7 +51,13 @@ const createAssignment=(req,res)=>{
                 }
             );
         }
-    );
+    )
+    }
+    )
+    .catch(err=>{
+        console.log(err);
+    })
+    
 }
 
 module.exports = { createAssignment};

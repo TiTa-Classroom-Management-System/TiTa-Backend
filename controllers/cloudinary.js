@@ -7,13 +7,14 @@ cloudinary.config({
     api_secret:process.env.CLOUDINARY_API_SECRET
 })
 
-exports.upload=async (req,res)=>{
-    let result=await cloudinary.uploader.upload(req.body.assignment_file,{
+exports.upload=async (req,res,assignment_file)=>{
+    let result=await cloudinary.uploader.upload(assignment_file.tempFilePath,{
         use_filename:true,
-        resource_type:'auto'
+        resource_type:'auto' 
     });
     res.json({
         public_id:result.public_id,
         url:result.secure_url,
     })
+    
 }
