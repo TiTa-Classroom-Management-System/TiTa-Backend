@@ -7,6 +7,6 @@ router.post("/login", login);
 router.get("/timetable/:email", getTimeTable);
 router.get("/classrooms/:email", getClassrooms);
 router.get("/quiz/:email", getQuiz);
-router.get("/quiz/:email", getAssignment);
+router.get("/assignment/:classid", getAssignment);
 
 module.exports = router;
