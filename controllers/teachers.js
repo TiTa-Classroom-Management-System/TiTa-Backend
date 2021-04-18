@@ -66,7 +66,7 @@ const getTimeTable = (req, res) => {
   WHERE tid IN (SELECT
     tid
   FROM teachers
-  WHERE email = "adm.tita.cms@gmail.com"))) u
+  WHERE email = ?))) u
     ON t.sub_class_id = u.sc_id) A
   JOIN (SELECT
     *
