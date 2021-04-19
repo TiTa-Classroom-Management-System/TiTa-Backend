@@ -148,17 +148,7 @@ const getAssignment = (req, res) => {
   );
 };
 
-const submitAssignment = (req, res) => {
-  const email = req.params.email;
-  db.query(
-    "SELECT assignment_name, creation_date, submission_date, assignment_link FROM asignments WHERE asignment_id IN (SELECT asignment_id FROM asignment_subclass WHERE sub_class_id IN (SELECT sub_class_id FROM teach_class WHERE tid IN (SELECT tid FROM teachers WHERE email = ? )))",
-    [email],
-    (err, results, fields) => {
-      if(err) throw new Error(err);
-      res.status(200).send(results);
-    }
-  );
-};
+
 
 
 module.exports = { login, getTimeTable, getClassrooms, getQuiz, getAssignment };

@@ -149,15 +149,19 @@ const getQuiz = (req, res) => {
 };
 
 const getAssignment = (req, res) => {
-  const classroom_id = req.params.classroom_id;
+  const email = req.params.email;
+  const {classroom_id}=req.body;
   db.query(
-    "SELECT assignment_name, creation_date, submission_date, assignment_link FROM assignments WHERE assignment_id IN (SELECT assignment_id FROM assignment_subclass WHERE sub_class_id = ? )",
-    [classroom_id],
+    "SELECT assignment_id, assignment_name, submission_date, assignment_link FROM assignment WHERE assignment_id in (SELECT assignment_id FROM assignment_subclass WHERE sub_class_id IN (SELECT A.sub_class_id FROM (SELECT sub_class_id FROM sub_class WHERE class_id=?) A INNER JOIN (SELECT sub_class_id FROM stud_class WHERE sid IN (SELECT sid FROM students WHERE email=?)) B ON A.sub_class_id=B.sub_class_id))"
+    ,[classroom_id,email],
     (err, results, fields) => {
       if(err) throw new Error(err);
+      console.log(results)
       res.status(200).send(results);
     }
   );
 };
+
+
 
 module.exports = { login, getTimeTable, getClassrooms, getQuiz, getAssignment };
