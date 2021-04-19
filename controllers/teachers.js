@@ -153,7 +153,7 @@ const getSolvedAssignment = (req, res) => {
   const assignment_id = req.params.assignment_id;
   console.log(assignment_id)
   db.query(
-    "SELECT assignment_link, sid, submitted_at FROM stud_assignment WHERE assignment_id = ?",
+    "SELECT assignment_link, S.sid, name, submitted_at FROM students S JOIN (SELECT assignment_link, sid, submitted_at FROM stud_assignment WHERE assignment_id = ?) T ON S.sid=T.sid;",
     [assignment_id],
     (err, results, fields) => {
       if(err) throw new Error(err);
