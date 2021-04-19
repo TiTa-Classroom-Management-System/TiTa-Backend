@@ -6,6 +6,9 @@ const cors = require("cors");
 require("dotenv").config();
 require("./db/db");
 
+const fileupload = require('express-fileupload'); 
+
+
 const indexRouter = require("./routes/index");
 const studentRouter = require("./routes/students");
 const teacherRouter = require("./routes/teachers");
@@ -15,6 +18,9 @@ const quizRouter = require("./routes/quiz");
 const assignmentRouter=require("./routes/assignment");
 
 const app = express();
+
+
+app.use(fileupload({useTempFiles: true}))
 
 app.use(logger("dev"));
 app.use(express.json());
