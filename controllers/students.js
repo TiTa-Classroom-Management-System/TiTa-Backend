@@ -150,7 +150,8 @@ const getQuiz = (req, res) => {
 
 const getAssignment = (req, res) => {
   const email = req.params.email;
-  const {classroom_id}=req.body;
+  const classroom_id=req.params.id;
+  console.log(classroom_id, email);
   db.query(
     "SELECT assignment_id, assignment_name, submission_date, assignment_link FROM assignment WHERE assignment_id in (SELECT assignment_id FROM assignment_subclass WHERE sub_class_id IN (SELECT A.sub_class_id FROM (SELECT sub_class_id FROM sub_class WHERE class_id=?) A INNER JOIN (SELECT sub_class_id FROM stud_class WHERE sid IN (SELECT sid FROM students WHERE email=?)) B ON A.sub_class_id=B.sub_class_id))"
     ,[classroom_id,email],
