@@ -8,7 +8,7 @@ cloudinary.config({
 })
 
 exports.upload=async (req,res,next)=>{
-    console.log('cloudinary',req.files)
+    console.log('cloudinary',req.body);
     try{
         let result=await cloudinary.uploader.upload(req.files.assignment_file.tempFilePath,{
             use_filename:true,

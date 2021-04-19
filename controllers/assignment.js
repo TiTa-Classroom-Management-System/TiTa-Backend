@@ -4,7 +4,7 @@ const{upload}=require("../controllers/cloudinary");
 
 const createAssignment=async (req,res)=>{
     let {assignment_name,creation_date,submission_date,classroom_id,subGroups,assignment_link}=req.body;
-    console.log('link',assignment_name,assignment_link)
+    console.log('link',assignment_name,assignment_link);
     db.query(
         "INSERT INTO assignment (assignment_name,creation_date,submission_date,assignment_link) VALUES (?, ?, ?, ?)",
         [assignment_name,creation_date,submission_date,assignment_link],
@@ -21,7 +21,7 @@ const createAssignment=async (req,res)=>{
                     }
                     const assignment_id = results[0].assignment_id;
                     console.log(assignment_id);
-                    subGroups=JSON.parse(subGroups);
+                    subGroups = subGroups.split(",");
                     for(let i=0; i<subGroups.length; i++){
                         console.log(subGroups[i]);
                         db.query(
