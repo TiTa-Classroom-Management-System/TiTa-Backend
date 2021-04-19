@@ -108,7 +108,7 @@ CREATE TABLE `stud_assignment` (
   `assignment_id` int NOT NULL,
   `assignment_link` varchar(150) NOT NULL,
   `sid` int NOT NULL,
-  `submiited_at` datetime DEFAULT NULL,
+  `submitted_at` datetime DEFAULT NULL,
   KEY `assignment_id` (`assignment_id`),
   KEY `sid` (`sid`),
   CONSTRAINT `stud_assignment_ibfk_1` FOREIGN KEY (`assignment_id`) REFERENCES `assignment` (`assignment_id`),
@@ -122,6 +122,7 @@ CREATE TABLE `stud_assignment` (
 
 LOCK TABLES `stud_assignment` WRITE;
 /*!40000 ALTER TABLE `stud_assignment` DISABLE KEYS */;
+INSERT INTO `stud_assignment` VALUES (6,'https://res.cloudinary.com/titacms/image/upload/v1618818850/csgcwgi1yi66vcpsnnvh.pdf',19103006,'2021-04-25 12:00:00');
 /*!40000 ALTER TABLE `stud_assignment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -297,4 +298,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-04-15 20:52:52
+-- Dump completed on 2021-04-19 13:34:37
