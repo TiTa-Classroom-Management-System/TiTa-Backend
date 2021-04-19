@@ -146,7 +146,7 @@ const joinClassroom = async (req, res) => {
                             if (err) {
                                 throw new Error(err);
                             }
-                            res.status(200).send(results);
+                            res.status(200).send({sub_class_id});
                         }
                     );
                 }
