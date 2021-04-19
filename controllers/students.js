@@ -162,6 +162,28 @@ const getAssignment = (req, res) => {
   );
 };
 
+const submitAssignment=(req,res)=>{
+  const {email, assignment_id, submitted_at, assignment_link}=req.body;
+  db.query(
+    "SELECT sid FROM students WHERE email=?"
+    ,[email],
+    (err, results, fields) => {
+      if(err) throw new Error(err);
+      console.log(results)
+      const sid=results[0].sid;
+      console.log(sid)
+      db.query(
+        "INSERT INTO stud_assignment (assignment_id, assignment_link, sid, submiited_at) VALUES (?, ?, ?, ?)"
+        ,[assignment_id, assignment_link, sid, submitted_at],
+        (err, results, fields) => {
+          if(err) throw new Error(err);
+          console.log(results)
+          res.status(200).send(results);
+        }
+      );
+    }
+  ); 
+}
 
 
-module.exports = { login, getTimeTable, getClassrooms, getQuiz, getAssignment };
+module.exports = { login, getTimeTable, getClassrooms, getQuiz, getAssignment , submitAssignment};
