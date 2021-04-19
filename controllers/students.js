@@ -173,7 +173,7 @@ const submitAssignment=(req,res)=>{
       const sid=results[0].sid;
       console.log(sid)
       db.query(
-        "INSERT INTO stud_assignment (assignment_id, assignment_link, sid, submiited_at) VALUES (?, ?, ?, ?)"
+        "INSERT INTO stud_assignment (assignment_id, assignment_link, sid, submitted_at) VALUES (?, ?, ?, ?)"
         ,[assignment_id, assignment_link, sid, submitted_at],
         (err, results, fields) => {
           if(err) throw new Error(err);
