@@ -75,7 +75,12 @@ const createClassRoom = async (req, res) => {
                       }
                     );
                   }
-                  res.status(200).send(classroom_id);
+                  // res.status(200).send(classroom_id);
+                  db.query("SELECT * FROM classrooms WHERE classroom_id = ?", [classroom_id], (err, results, fields) =>
+                  {
+                    if(err) throw new Error(err);
+                    res.status(200).send(results[0]);
+                  })
                 }
               );
             } catch (err) {
