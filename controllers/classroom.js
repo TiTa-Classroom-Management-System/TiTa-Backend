@@ -2,103 +2,107 @@ const db = require("../db/db");
 const { customAlphabet } = require("nanoid");
 
 const createClassRoom = async (req, res) => {
-    const {
-        subjectName,
-        subjectCode,
-        subGroups,
-        email,
-        branchName,
-        branchYear,
-    } = req.body;
-
-    // Classroom Code/ID
-    const nanoid = customAlphabet("abcdefghijklmnopqrstuvwxyz", 8);
-    const classroom_id = nanoid();
-
-    db.query(
-        "SELECT tid FROM teachers where email = ?",
-        [email],
-        (err, results, fields) => {
-            if (err) {
-                throw new Error(err);
-            }
-            const tid = results[0].tid;
-            db.query(
-                "SELECT * FROM classrooms where classroom_id = ?",
-                [classroom_id],
-                (err, results, fields) => {
-                    if (err) {
-                        throw new Error(err);
-                    }
-                    if (results.length === 0) {
-                        try {
-                            db.query(
-                                "INSERT INTO classrooms VALUES (?, ?, ?, ?, ?, ?)",
-                                [
-                                    classroom_id,
-                                    subjectName,
-                                    subjectCode,
-                                    subGroups,
-                                    branchName,
-                                    branchYear,
-                                ],
-                                (err, results, fields) => {
-                                    if (err) {
-                                        throw new Error(err);
-                                    }
-                                    for (let i = 1; i <= subGroups; i++) {
-                                        db.query(
-                                            "INSERT INTO sub_class(class_id,grp_no) VALUES (?,?)",
-                                            [classroom_id, parseInt(i)],
-                                            (err, results, fields) => {
-                                                if (err) {
-                                                    throw new Error(err);
-                                                }
-                                                db.query(
-                                                    "SELECT sub_class_id FROM sub_class WHERE class_id = ?",
-                                                    [classroom_id],
-                                                    (err, results, fields) => {
-                                                        if (err) {
-                                                            throw new Error(
-                                                                err
-                                                            );
-                                                        }
-                                                        db.query(
-                                                            "INSERT INTO teach_class(tid, sub_class_id) VALUES (?, ?)",
-                                                            [
-                                                                tid,
-                                                                results[i - 1]
-                                                                    .sub_class_id,
-                                                            ],
-                                                            (
-                                                                err,
-                                                                results,
-                                                                fields
-                                                            ) => {
-                                                                if (err) {
-                                                                    throw new Error(
-                                                                        err
-                                                                    );
-                                                                }
-                                                            }
+  const {
+      subjectName,
+      subjectCode,
+      subGroups,
+      email,
+      branchName,
+      branchYear,
+  } = req.body;
+  
+  // Classroom Code/ID
+  const nanoid = customAlphabet("abcdefghijklmnopqrstuvwxyz", 8);
+  const classroom_id = nanoid();
+  
+  db.query(
+    "SELECT tid FROM teachers where email = ?",
+    [email],
+    (err, results, fields) => {
+        if (err) {
+            throw new Error(err);
+        }
+        const tid = results[0].tid;
+        db.query(
+            "SELECT * FROM classrooms where classroom_id = ?",
+            [classroom_id],
+            (err, results, fields) => {
+                if (err) {
+                    throw new Error(err);
+                }
+                if (results.length === 0) {
+                    try {
+                        db.query(
+                            "INSERT INTO classrooms VALUES (?, ?, ?, ?, ?, ?)",
+                            [
+                                classroom_id,
+                                subjectName,
+                                subjectCode,
+                                subGroups,
+                                branchName,
+                                branchYear,
+                            ],
+                            (err, results, fields) => {
+                                if (err) {
+                                    throw new Error(err);
+                                }
+                                for (let i = 1; i <= subGroups; i++) {
+                                    db.query(
+                                        "INSERT INTO sub_class(class_id,grp_no) VALUES (?,?)",
+                                        [classroom_id, parseInt(i)],
+                                        (err, results, fields) => {
+                                            if (err) {
+                                                throw new Error(err);
+                                            }
+                                            db.query(
+                                                "SELECT sub_class_id FROM sub_class WHERE class_id = ?",
+                                                [classroom_id],
+                                                (err, results, fields) => {
+                                                    if (err) {
+                                                        throw new Error(
+                                                            err
                                                         );
                                                     }
-                                                );
-                                            }
-                                        );
-                                    }
-                                    res.status(200).send(classroom_id);
+                                                    db.query(
+                                                        "INSERT INTO teach_class(tid, sub_class_id) VALUES (?, ?)",
+                                                        [
+                                                            tid,
+                                                            results[i - 1]
+                                                                .sub_class_id,
+                                                        ],
+                                                        (
+                                                            err,
+                                                            results,
+                                                            fields
+                                                        ) => {
+                                                            if (err) {
+                                                                throw new Error(
+                                                                    err
+                                                                );
+                                                            }
+                                                        }
+                                                    );
+                                                }
+                                            );
+                                        }
+                                    );
                                 }
-                            );
-                        } catch (err) {
-                            throw new Error(err);
-                        }
+                                // res.status(200).send(classroom_id);
+                                db.query("SELECT * FROM Classrooms WHERE classroom_id = ?", [classroom_id], (err, results, fields) =>
+                                {
+                                  res.status(200).send(results[0]);
+                                });
+                            }
+                        );
+                    } catch (err) {
+                        throw new Error(err);
                     }
                 }
-            );
-        }
-    );
-};
+            }
+        );
+    }
+);
+}
 
 const getClassroom = async (req, res) => {
     const classid = req.params.id;
