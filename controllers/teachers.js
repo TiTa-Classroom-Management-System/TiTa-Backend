@@ -141,7 +141,7 @@ const getAssignment = (req, res) => {
   const classid = req.params.classid;
   console.log(classid)
   db.query(
-    "SELECT assignment_name, creation_date, submission_date, assignment_link, grp_no FROM (SELECT * FROM assignment WHERE assignment_id IN (SELECT assignment_id FROM assignment_subclass WHERE sub_class_id IN (SELECT sub_class_id FROM sub_class WHERE class_id = ? ))) A JOIN (SELECT assignment_id, grp_no FROM assignment_subclass X JOIN sub_class Y ON X.sub_class_id=Y.sub_class_id) B ON A.assignment_id=B.assignment_id",
+    "SELECT assignment_id, assignment_name, creation_date, submission_date, assignment_link FROM assignment WHERE assignment_id IN (SELECT assignment_id FROM assignment_subclass WHERE sub_class_id IN (SELECT sub_class_id FROM sub_class WHERE class_id = ? ))",
     [classid],
     (err, results, fields) => {
       if(err) throw new Error(err);
@@ -154,13 +154,20 @@ const getSolvedAssignment = (req, res) => {
   const assignment_id = req.params.assignment_id;
   console.log(assignment_id)
   db.query(
-    "SELECT assignment_link, S.sid, name, submitted_at FROM students S JOIN (SELECT assignment_link, sid, submitted_at FROM stud_assignment WHERE assignment_id = ?) T ON S.sid=T.sid;",
-    [assignment_id],
+    "SELECT S.sid, name, assignment_link, submitted_at, submission_date FROM students S JOIN (SELECT * FROM (SELECT * FROM stud_assignment WHERE assignment_id = ?) A JOIN (SELECT assignment_id AS ass_id, submission_date FROM assignment WHERE assignment_id = ?) B ON A.assignment_id = B.ass_id ) T ON S.sid=T.sid;",
+    [assignment_id, assignment_id],
     (err, results, fields) => {
       if(err) throw new Error(err);
-      const sid=results[0].sid;
-      console.log(sid,results)
-      res.status(200).send(results);
+      try
+      {
+        const sid=results[0].sid;
+        console.log(sid,results)
+        res.status(200).send(results);
+      }
+      catch
+      {
+        res.status(204).send([]);
+      }
     }
   );
 };
