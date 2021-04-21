@@ -5,6 +5,7 @@ const connection = mysql.createConnection({
   user: process.env.MYSQL_USER,
   password: process.env.MYSQL_PASS,
   database: "tita",
+  timezone: "UTC+0"
 });
 
 connection.connect((err) => {

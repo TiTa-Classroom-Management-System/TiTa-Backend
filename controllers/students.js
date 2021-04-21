@@ -153,8 +153,27 @@ const getAssignment = (req, res) => {
   const classroom_id=req.params.id;
   console.log(classroom_id, email);
   db.query(
-    "SELECT assignment_id, assignment_name, submission_date, assignment_link FROM assignment WHERE assignment_id in (SELECT assignment_id FROM assignment_subclass WHERE sub_class_id IN (SELECT A.sub_class_id FROM (SELECT sub_class_id FROM sub_class WHERE class_id=?) A INNER JOIN (SELECT sub_class_id FROM stud_class WHERE sid IN (SELECT sid FROM students WHERE email=?)) B ON A.sub_class_id=B.sub_class_id))"
-    ,[classroom_id,email],
+    `SELECT X.assignment_id, assignment_name, submission_date, assignment_link, solution_link, submitted_at FROM (SELECT *
+    FROM assignment
+    WHERE assignment_id IN (SELECT
+      assignment_id
+    FROM assignment_subclass
+    WHERE sub_class_id IN (SELECT
+      A.sub_class_id
+    FROM (SELECT
+      sub_class_id
+    FROM sub_class
+    WHERE class_id = ?) A
+    INNER JOIN (SELECT
+      sub_class_id
+    FROM stud_class
+    WHERE sid IN (SELECT
+      sid
+    FROM students
+    WHERE email = ?)) B
+      ON A.sub_class_id = B.sub_class_id))) X LEFT OUTER JOIN (SELECT assignment_id, submitted_at, assignment_link as solution_link FROM stud_assignment WHERE sid IN (SELECT sid FROM students WHERE email=?)) Y
+      ON X.assignment_id = Y.assignment_id`
+    ,[classroom_id, email, email],
     (err, results, fields) => {
       if(err) throw new Error(err);
       console.log(results)
@@ -166,8 +185,7 @@ const getAssignment = (req, res) => {
 const submitAssignment=(req,res)=>{
   const {email, assignment_id, submitted_at, assignment_link}=req.body;
   db.query(
-    "SELECT sid FROM students WHERE email=?"
-    ,[email],
+    "SELECT sid FROM students WHERE email=?", [email],
     (err, results, fields) => {
       if(err) throw new Error(err);
       console.log(results)
