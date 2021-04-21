@@ -7,7 +7,7 @@ const { upload } = require("../controllers/cloudinary");
 router.post("/login", login);
 router.get("/timetable/:email", getTimeTable);
 router.get("/classrooms/:email", getClassrooms);
-router.get("/quiz/:email", getQuiz);
+router.get("/quiz/:email/:id", getQuiz);
 router.get("/assignment/:email/:id", getAssignment);
 router.post("/assignment/upload",upload,submitAssignment)
 

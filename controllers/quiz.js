@@ -1,7 +1,7 @@
 const db = require("../db/db");
 
 const createQuiz = (req, res) => {
-    const { classroom_id, subGroups, quizName, startTime, endTime, quizLink } = req.body;
+    let { classroom_id, subGroups, quizName, startTime, endTime, quizLink } = req.body;
     db.query(
         "INSERT INTO quizzes (quiz_name, start_time, end_time, quiz_link) VALUES (?, ?, ?, ?)",
         [quizName, startTime, endTime, quizLink],
@@ -17,6 +17,7 @@ const createQuiz = (req, res) => {
                         throw new Error(err);
                     }
                     const quiz_id = results[0].quiz_id;
+                    subGroups = subGroups.split(",");
                     for(let i=0; i<subGroups.length; i++){
                         db.query(
                             "SELECT sub_class_id FROM sub_class WHERE grp_no = ? AND class_id = ?",

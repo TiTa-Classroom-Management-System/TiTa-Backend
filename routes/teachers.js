@@ -6,7 +6,7 @@ const { login, getTimeTable, getClassrooms, getQuiz ,getAssignment,getSolvedAssi
 router.post("/login", login);
 router.get("/timetable/:email", getTimeTable);
 router.get("/classrooms/:email", getClassrooms);
-router.get("/quiz/:email", getQuiz);
+router.get("/quiz/:classid", getQuiz);
 router.get("/assignment/:classid", getAssignment);
 router.get("/assignment/solved/:assignment_id",getSolvedAssignment)
 

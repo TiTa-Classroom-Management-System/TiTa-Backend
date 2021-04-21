@@ -126,10 +126,10 @@ const getClassrooms = (req, res) => {
 };
 
 const getQuiz = (req, res) => {
-  const email = req.params.email;
+  const classid = req.params.classid;
   db.query(
-    "SELECT quiz_name, start_time, end_time, quiz_link FROM quizzes WHERE quiz_id IN (SELECT quiz_id FROM quiz_subclass WHERE sub_class_id IN (SELECT sub_class_id FROM teach_class WHERE tid IN (SELECT tid FROM teachers WHERE email = ? )))",
-    [email],
+    "SELECT quiz_id, quiz_name, start_time, end_time, quiz_link FROM quizzes WHERE quiz_id IN (SELECT quiz_id FROM quiz_subclass WHERE sub_class_id IN (SELECT sub_class_id FROM sub_class WHERE class_id = ? ))",
+    [classid],
     (err, results, fields) => {
       if(err) throw new Error(err);
       res.status(200).send(results);
