@@ -98,6 +98,29 @@ INSERT INTO `classrooms` VALUES ('dltpntgc','Computer Networks','CSN-210',6,'CSE
 UNLOCK TABLES;
 
 --
+-- Table structure for table `resources`
+--
+
+DROP TABLE IF EXISTS `resources`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `resources` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL,
+  `link` varchar(150) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `resources`
+--
+
+LOCK TABLES `resources` WRITE;
+/*!40000 ALTER TABLE `resources` DISABLE KEYS */;
+/*!40000 ALTER TABLE `resources` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `quiz_subclass`
 --
 
@@ -259,6 +282,32 @@ INSERT INTO `sub_class` VALUES (27,'dltpntgc',1),(28,'dltpntgc',2),(29,'dltpntgc
 UNLOCK TABLES;
 
 --
+-- Table structure for table `sub_resources`
+--
+
+DROP TABLE IF EXISTS `sub_resources`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `sub_resources` (
+  `sub_class_id` int DEFAULT NULL,
+  `resource_id` int DEFAULT NULL,
+  KEY `sub_class_id` (`sub_class_id`),
+  KEY `resource_id` (`resource_id`),
+  CONSTRAINT `sub_resources_ibfk_1` FOREIGN KEY (`sub_class_id`) REFERENCES `sub_class` (`sub_class_id`),
+  CONSTRAINT `sub_resources_ibfk_2` FOREIGN KEY (`resource_id`) REFERENCES `resources` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `sub_resources`
+--
+
+LOCK TABLES `sub_resources` WRITE;
+/*!40000 ALTER TABLE `sub_resources` DISABLE KEYS */;
+/*!40000 ALTER TABLE `sub_resources` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `teach_class`
 --
 
@@ -350,4 +399,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-04-21 19:26:21
+-- Dump completed on 2021-04-22 11:09:43
