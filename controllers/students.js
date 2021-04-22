@@ -185,7 +185,7 @@ const getAssignment = (req, res) => {
 };
 
 const submitAssignment=(req,res)=>{
-  const {email, assignment_id, submitted_at, assignment_link}=req.body;
+  const {email, assignment_id, submitted_at, link}=req.body;
   db.query(
     "SELECT sid FROM students WHERE email=?", [email],
     (err, results, fields) => {
@@ -195,7 +195,7 @@ const submitAssignment=(req,res)=>{
       console.log(sid)
       db.query(
         "INSERT INTO stud_assignment (assignment_id, assignment_link, sid, submitted_at) VALUES (?, ?, ?, ?)"
-        ,[assignment_id, assignment_link, sid, submitted_at],
+        ,[assignment_id, link, sid, submitted_at],
         (err, results, fields) => {
           if(err) throw new Error(err);
           console.log(results)
