@@ -29,7 +29,7 @@ CREATE TABLE `assignment` (
   `submission_date` datetime NOT NULL,
   `assignment_link` varchar(150) NOT NULL,
   PRIMARY KEY (`assignment_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,7 +38,7 @@ CREATE TABLE `assignment` (
 
 LOCK TABLES `assignment` WRITE;
 /*!40000 ALTER TABLE `assignment` DISABLE KEYS */;
-INSERT INTO `assignment` VALUES (1,'CPU Scheduling','2021-04-11 13:23:44','2021-04-20 12:00:00','https://docs.google.com/forms/d/e/1FAIpQLSfmiSooCOZGveysh7QQJCkd7Us1WSdY4ybaSAZV3ln7o6XNug/viewform?usp=sf_link'),(2,'Threads','2021-04-15 13:23:44','2021-04-25 12:00:00','https://docs.google.com/forms/d/e/abcde'),(3,'Threads and stuff','2021-04-15 13:23:44','2021-04-25 12:00:00','https://docs.google.com/forms/d/e/fghi'),(4,'Threads and more','2021-04-15 13:23:44','2021-04-25 12:00:00','https://docs.google.com/forms/d/e/pqrs'),(5,'Threads and more','2021-04-15 13:23:44','2021-04-25 12:00:00','https://docs.google.com/forms/d/e/pqrstuv'),(6,'Threads and more','2021-04-15 13:23:44','2021-04-25 12:00:00','https://docs.google.com/forms/d/e/pqrstuvwxyz'),(7,'Threads and more','2021-04-15 13:23:44','2021-04-25 12:00:00','https://docs.google.com/forms/d/e/pqrstuvwxyz'),(8,'Threads and more','2021-04-15 13:23:44','2021-04-25 12:00:00','https://docs.google.com/forms/d/e/pqrstuvwxyz');
+INSERT INTO `assignment` VALUES (14,'Home Assignment 4','2021-04-21 19:22:59','2021-04-28 22:00:00','https://res.cloudinary.com/titacms/image/upload/v1619013185/daooeun7lcuqqwijmuji.pdf');
 /*!40000 ALTER TABLE `assignment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -65,7 +65,7 @@ CREATE TABLE `assignment_subclass` (
 
 LOCK TABLES `assignment_subclass` WRITE;
 /*!40000 ALTER TABLE `assignment_subclass` DISABLE KEYS */;
-INSERT INTO `assignment_subclass` VALUES (6,24);
+INSERT INTO `assignment_subclass` VALUES (14,27),(14,28),(14,29),(14,31),(14,30),(14,32);
 /*!40000 ALTER TABLE `assignment_subclass` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -93,7 +93,7 @@ CREATE TABLE `classrooms` (
 
 LOCK TABLES `classrooms` WRITE;
 /*!40000 ALTER TABLE `classrooms` DISABLE KEYS */;
-INSERT INTO `classrooms` VALUES ('egneirnj','Bakchodi-Advanced','BAK-069',1,'MechE',2020),('rtmfjzno','OS','CSN209',2,'CSE',2019),('uupntlro','Test Subject','TEST-123',2,'CSE',2019);
+INSERT INTO `classrooms` VALUES ('dltpntgc','Computer Networks','CSN-210',6,'CSE',2019);
 /*!40000 ALTER TABLE `classrooms` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -109,16 +109,62 @@ CREATE TABLE `resources` (
   `name` varchar(50) NOT NULL,
   `link` varchar(150) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `resources`
+-- Table structure for table `quiz_subclass`
 --
 
 LOCK TABLES `resources` WRITE;
 /*!40000 ALTER TABLE `resources` DISABLE KEYS */;
 /*!40000 ALTER TABLE `resources` ENABLE KEYS */;
+-- Dumping data for table `quiz_subclass`
+--
+
+
+DROP TABLE IF EXISTS `quiz_subclass`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `quiz_subclass` (
+  `quiz_id` int NOT NULL,
+  `sub_class_id` int NOT NULL,
+  KEY `quiz_id` (`quiz_id`),
+  KEY `sub_class_id` (`sub_class_id`),
+  CONSTRAINT `quiz_subclass_ibfk_1` FOREIGN KEY (`quiz_id`) REFERENCES `quizzes` (`quiz_id`),
+  CONSTRAINT `quiz_subclass_ibfk_2` FOREIGN KEY (`sub_class_id`) REFERENCES `sub_class` (`sub_class_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+--
+-- Dumping data for table `resources`
+--
+
+
+LOCK TABLES `quiz_subclass` WRITE;
+/*!40000 ALTER TABLE `quiz_subclass` DISABLE KEYS */;
+/*!40000 ALTER TABLE `quiz_subclass` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `quizzes`
+--
+
+DROP TABLE IF EXISTS `quizzes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `quizzes` (
+  `quiz_id` int NOT NULL AUTO_INCREMENT,
+  `quiz_name` varchar(50) NOT NULL,
+  `start_time` datetime NOT NULL,
+  `end_time` datetime NOT NULL,
+  `quiz_link` varchar(150) NOT NULL,
+  PRIMARY KEY (`quiz_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `quizzes`
+--
+
+LOCK TABLES `quizzes` WRITE;
+/*!40000 ALTER TABLE `quizzes` DISABLE KEYS */;
+/*!40000 ALTER TABLE `quizzes` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -146,7 +192,7 @@ CREATE TABLE `stud_assignment` (
 
 LOCK TABLES `stud_assignment` WRITE;
 /*!40000 ALTER TABLE `stud_assignment` DISABLE KEYS */;
-INSERT INTO `stud_assignment` VALUES (6,'https://res.cloudinary.com/titacms/image/upload/v1618818850/csgcwgi1yi66vcpsnnvh.pdf',19103006,'2021-04-25 12:00:00');
+INSERT INTO `stud_assignment` VALUES (14,'https://res.cloudinary.com/titacms/image/upload/v1619013247/g3tzpbcdjd3vgiet5hrs.pdf',19103057,'2021-04-21 19:24:01');
 /*!40000 ALTER TABLE `stud_assignment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -173,7 +219,7 @@ CREATE TABLE `stud_class` (
 
 LOCK TABLES `stud_class` WRITE;
 /*!40000 ALTER TABLE `stud_class` DISABLE KEYS */;
-INSERT INTO `stud_class` VALUES (19103057,20),(19103006,24),(19103006,26);
+INSERT INTO `stud_class` VALUES (19103057,29);
 /*!40000 ALTER TABLE `stud_class` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -199,7 +245,7 @@ CREATE TABLE `students` (
 
 LOCK TABLES `students` WRITE;
 /*!40000 ALTER TABLE `students` DISABLE KEYS */;
-INSERT INTO `students` VALUES (19103006,'Puneet Bansal','puneetbansal.bt19cse@pec.edu.in'),(19103049,'Utkarsh Goel','utkarshgoel.bt19cse@pec.edu.in'),(19103057,'Shubh Ashish','shubhashish.bt19cse@pec.edu.in');
+INSERT INTO `students` VALUES (19103057,'Shubh Ashish','shubhashish.bt19cse@pec.edu.in');
 /*!40000 ALTER TABLE `students` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -217,7 +263,7 @@ CREATE TABLE `sub_class` (
   PRIMARY KEY (`sub_class_id`),
   KEY `class_id` (`class_id`),
   CONSTRAINT `sub_class_ibfk_1` FOREIGN KEY (`class_id`) REFERENCES `classrooms` (`classroom_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -226,7 +272,7 @@ CREATE TABLE `sub_class` (
 
 LOCK TABLES `sub_class` WRITE;
 /*!40000 ALTER TABLE `sub_class` DISABLE KEYS */;
-INSERT INTO `sub_class` VALUES (19,'uupntlro',1),(20,'uupntlro',2),(24,'egneirnj',1),(25,'rtmfjzno',1),(26,'rtmfjzno',2);
+INSERT INTO `sub_class` VALUES (27,'dltpntgc',1),(28,'dltpntgc',2),(29,'dltpntgc',3),(30,'dltpntgc',4),(31,'dltpntgc',5),(32,'dltpntgc',6);
 /*!40000 ALTER TABLE `sub_class` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -279,7 +325,7 @@ CREATE TABLE `teach_class` (
 
 LOCK TABLES `teach_class` WRITE;
 /*!40000 ALTER TABLE `teach_class` DISABLE KEYS */;
-INSERT INTO `teach_class` VALUES (2,19),(2,20),(2,24),(5,25),(5,26);
+INSERT INTO `teach_class` VALUES (6,27),(6,28),(6,29),(6,30),(6,31),(6,32);
 /*!40000 ALTER TABLE `teach_class` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -296,7 +342,7 @@ CREATE TABLE `teachers` (
   `email` varchar(150) NOT NULL,
   PRIMARY KEY (`tid`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -305,7 +351,7 @@ CREATE TABLE `teachers` (
 
 LOCK TABLES `teachers` WRITE;
 /*!40000 ALTER TABLE `teachers` DISABLE KEYS */;
-INSERT INTO `teachers` VALUES (1,'Utkarsh Goel','utkarsh@gmail.com'),(2,'TiTa Classroom Management System','adm.tita.cms@gmail.com'),(3,'Taranjot Singh','taranjotsfeb2001@gmail.com'),(4,'Shubh Ashish','ashishshubh001@gmail.com'),(5,'Puneet Bansal','puneetbansal15801@gmail.com');
+INSERT INTO `teachers` VALUES (6,'TiTa Classroom Management System','adm.tita.cms@gmail.com');
 /*!40000 ALTER TABLE `teachers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -326,7 +372,7 @@ CREATE TABLE `timetable` (
   PRIMARY KEY (`tt_id`),
   KEY `sub_class_id` (`sub_class_id`),
   CONSTRAINT `timetable_ibfk_1` FOREIGN KEY (`sub_class_id`) REFERENCES `sub_class` (`sub_class_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -335,7 +381,7 @@ CREATE TABLE `timetable` (
 
 LOCK TABLES `timetable` WRITE;
 /*!40000 ALTER TABLE `timetable` DISABLE KEYS */;
-INSERT INTO `timetable` VALUES (5,20,'11:00:00','12:00:00','Thursday','Lecture'),(6,20,'10:00:00','12:00:00','Saturday','Practical'),(7,19,'15:00:00','17:00:00','Monday','Practical'),(8,19,'11:00:00','12:00:00','Tuesday','Tutorial');
+INSERT INTO `timetable` VALUES (9,27,'09:00:00','10:00:00','Monday','Lecture');
 /*!40000 ALTER TABLE `timetable` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
