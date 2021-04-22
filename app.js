@@ -16,6 +16,7 @@ const classroomRouter = require("./routes/classroom");
 const timetableRouter = require("./routes/timetable");
 const quizRouter = require("./routes/quiz");
 const assignmentRouter=require("./routes/assignment");
+const resourceRouter=require("./routes/resource")
 
 const app = express();
 
@@ -36,5 +37,6 @@ app.use("/classroom", classroomRouter);
 app.use("/timetable", timetableRouter);
 app.use("/quiz", quizRouter);
 app.use("/assignment",assignmentRouter);
+app.use("/resource", resourceRouter);
 
 module.exports = app;
