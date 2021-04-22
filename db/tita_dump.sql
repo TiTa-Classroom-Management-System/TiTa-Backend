@@ -109,15 +109,20 @@ CREATE TABLE `resources` (
   `name` varchar(50) NOT NULL,
   `link` varchar(150) NOT NULL,
   PRIMARY KEY (`id`)
--- Table structure for table `quiz_subclass`
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `resources`
 --
 
 LOCK TABLES `resources` WRITE;
 /*!40000 ALTER TABLE `resources` DISABLE KEYS */;
 /*!40000 ALTER TABLE `resources` ENABLE KEYS */;
--- Dumping data for table `quiz_subclass`
---
+UNLOCK TABLES;
 
+--
+-- Table structure for table `quiz_subclass`
+--
 
 DROP TABLE IF EXISTS `quiz_subclass`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -131,10 +136,10 @@ CREATE TABLE `quiz_subclass` (
   CONSTRAINT `quiz_subclass_ibfk_2` FOREIGN KEY (`sub_class_id`) REFERENCES `sub_class` (`sub_class_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
---
--- Dumping data for table `resources`
---
 
+--
+-- Dumping data for table `quiz_subclass`
+--
 
 LOCK TABLES `quiz_subclass` WRITE;
 /*!40000 ALTER TABLE `quiz_subclass` DISABLE KEYS */;
