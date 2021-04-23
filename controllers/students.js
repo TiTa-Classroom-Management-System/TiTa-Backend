@@ -150,6 +150,32 @@ const getQuiz = (req, res) => {
   );
 };
 
+const getAllQuizzes = (req, res) =>
+{
+  const { email } = req.params;
+  db.query(
+    `SELECT
+      *
+    FROM quizzes
+    WHERE quiz_id IN (SELECT
+      quiz_id
+    FROM quiz_subclass
+    WHERE sub_class_id IN (SELECT
+      sub_class_id
+    FROM stud_class
+    WHERE sid IN (SELECT
+      sid
+    FROM students
+    WHERE email = ?)))`,
+    [email],
+    (err, results, fields) =>
+    {
+      if(err) throw new Error(err);
+      res.send(results);
+    }
+  )
+}
+
 const getAssignment = (req, res) => {
   const email = req.params.email;
   const classroom_id=req.params.id;
@@ -183,6 +209,54 @@ const getAssignment = (req, res) => {
     }
   );
 };
+
+const getAllAssignments = (req, res) =>
+{
+  const { email } = req.params;
+  db.query(
+    `SELECT
+      *
+    FROM (SELECT
+      assignment_id,
+      submitted_at
+    FROM stud_assignment
+    WHERE sid IN (SELECT
+      sid
+    FROM students
+    WHERE email = ?)) FIRSTTABLE
+    RIGHT JOIN (SELECT
+      X.assignment_id,
+      assignment_name,
+      submission_date,
+      class_id
+    FROM assignment X
+    JOIN ((SELECT
+      A.sub_class_id,
+      class_id,
+      assignment_id
+    FROM assignment_subclass A
+    JOIN (SELECT
+      class_id,
+      sub_class_id
+    FROM sub_class
+    WHERE sub_class_id IN (SELECT
+      sub_class_id
+    FROM stud_class
+    WHERE sid IN (SELECT
+      sid
+    FROM students
+    WHERE email = ?))) B
+      ON A.sub_class_id = B.sub_class_id)) Y
+      ON X.assignment_id = Y.assignment_id) SECONDTABLE
+      ON FIRSTTABLE.assignment_id = SECONDTABLE.assignment_id;`,
+    [email, email],
+    (err, results, fields) =>
+    {
+      if(err) throw new Error(err);
+      res.status(200).send(results);
+    }
+  )
+}
 
 const submitAssignment=(req,res)=>{
   const {email, assignment_id, submitted_at, link}=req.body;
@@ -221,4 +295,4 @@ const getResource = (req, res) => {
 };
 
 
-module.exports = { login, getTimeTable, getClassrooms, getQuiz, getAssignment , submitAssignment, getResource};
+module.exports = { login, getTimeTable, getClassrooms, getQuiz, getAllQuizzes , getAssignment, getAllAssignments , submitAssignment, getResource};
