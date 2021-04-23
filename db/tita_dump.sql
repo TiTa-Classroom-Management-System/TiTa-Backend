@@ -29,7 +29,7 @@ CREATE TABLE `assignment` (
   `submission_date` datetime NOT NULL,
   `assignment_link` varchar(150) NOT NULL,
   PRIMARY KEY (`assignment_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,7 +38,7 @@ CREATE TABLE `assignment` (
 
 LOCK TABLES `assignment` WRITE;
 /*!40000 ALTER TABLE `assignment` DISABLE KEYS */;
-INSERT INTO `assignment` VALUES (14,'Home Assignment 4','2021-04-21 19:22:59','2021-04-28 22:00:00','https://res.cloudinary.com/titacms/image/upload/v1619013185/daooeun7lcuqqwijmuji.pdf');
+INSERT INTO `assignment` VALUES (17,'Basic Practice','2021-04-23 19:04:00','2021-04-24 11:00:00','https://res.cloudinary.com/titacms/image/upload/v1619184854/jjhxpsbbnpbx99v5w7ef.pdf'),(18,'Unsupervised Learning','2021-04-23 19:04:50','2021-04-23 10:04:00','https://res.cloudinary.com/titacms/image/upload/v1619184896/axhm69d69aclznvra7kh.pdf'),(19,'Advanced Practice','2021-04-23 19:05:46','2021-04-26 22:05:00','https://res.cloudinary.com/titacms/image/upload/v1619184951/hhwba6lehjqpvwgiapil.pdf'),(20,'Learning Algorithm','2021-04-23 19:07:17','2021-04-22 21:09:00','https://res.cloudinary.com/titacms/image/upload/v1619185041/nmnzcvaqahmlvuav3ocy.pdf');
 /*!40000 ALTER TABLE `assignment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -65,7 +65,7 @@ CREATE TABLE `assignment_subclass` (
 
 LOCK TABLES `assignment_subclass` WRITE;
 /*!40000 ALTER TABLE `assignment_subclass` DISABLE KEYS */;
-INSERT INTO `assignment_subclass` VALUES (14,27),(14,28),(14,29),(14,31),(14,30),(14,32);
+INSERT INTO `assignment_subclass` VALUES (17,27),(17,28),(17,29),(18,27),(18,28),(18,29),(19,27),(19,28),(19,29),(20,27),(20,28),(20,29);
 /*!40000 ALTER TABLE `assignment_subclass` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -93,31 +93,8 @@ CREATE TABLE `classrooms` (
 
 LOCK TABLES `classrooms` WRITE;
 /*!40000 ALTER TABLE `classrooms` DISABLE KEYS */;
-INSERT INTO `classrooms` VALUES ('dltpntgc','Computer Networks','CSN-210',6,'CSE',2019);
+INSERT INTO `classrooms` VALUES ('dltpntgc','Computer Networks','CSN-210',6,'CSE',2019),('fysoirzb','Fluid Dynamics','MEC-205',6,'MechE',2021),('nfvwyzqb','Solid Mechanics','CVE-201',2,'CivE',2020);
 /*!40000 ALTER TABLE `classrooms` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `resources`
---
-
-DROP TABLE IF EXISTS `resources`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `resources` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) NOT NULL,
-  `link` varchar(150) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Dumping data for table `resources`
---
-
-LOCK TABLES `resources` WRITE;
-/*!40000 ALTER TABLE `resources` DISABLE KEYS */;
-/*!40000 ALTER TABLE `resources` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -143,6 +120,7 @@ CREATE TABLE `quiz_subclass` (
 
 LOCK TABLES `quiz_subclass` WRITE;
 /*!40000 ALTER TABLE `quiz_subclass` DISABLE KEYS */;
+INSERT INTO `quiz_subclass` VALUES (1,27),(1,28),(1,29),(1,30),(1,32),(1,31),(1,27),(1,28),(1,29),(1,30),(1,31),(1,32),(1,27),(1,28),(1,29),(1,30),(1,31),(1,32),(4,27),(4,28),(4,29),(4,30),(4,31),(4,32),(5,33),(6,34);
 /*!40000 ALTER TABLE `quiz_subclass` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -160,7 +138,7 @@ CREATE TABLE `quizzes` (
   `end_time` datetime NOT NULL,
   `quiz_link` varchar(150) NOT NULL,
   PRIMARY KEY (`quiz_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -169,7 +147,32 @@ CREATE TABLE `quizzes` (
 
 LOCK TABLES `quizzes` WRITE;
 /*!40000 ALTER TABLE `quizzes` DISABLE KEYS */;
+INSERT INTO `quizzes` VALUES (1,'Entertainment Quiz','2021-04-24 11:00:00','2021-04-24 11:40:00','https://docs.google.com/forms/d/e/1FAIpQLSfmiSooCOZGveysh7QQJCkd7Us1WSdY4ybaSAZV3ln7o6XNug/viewform?usp=sf_link'),(2,'Entertainment Quiz 1','2021-04-24 10:50:00','2021-04-24 11:00:00','https://docs.google.com/forms/d/e/1FAIpQLSfmiSooCOZGveysh7QQJCkd7Us1WSdY4ybaSAZV3ln7o6XNug/viewform?usp=sf_link'),(3,'Entertainment Quiz 2','2021-04-28 11:00:00','2021-04-28 12:00:00','https://docs.google.com/forms/d/e/1FAIpQLSfmiSooCOZGveysh7QQJCkd7Us1WSdY4ybaSAZV3ln7o6XNug/viewform?usp=sf_link'),(4,'Tathya General Quiz','2021-04-23 11:00:00','2021-04-23 12:00:00','https://docs.google.com/forms/d/e/1FAIpQLSf3H1el1gPhU-_lruUAWV5cfTnJVhoutL7Gouo0zF0jLaSPRQ/viewform?usp=sf_link'),(5,'Test Quiz','2021-04-24 16:00:00','2021-04-24 16:15:00','test-quiz.com'),(6,'Test Quiz 2','2021-04-25 14:50:00','2021-04-25 15:00:00','https://test-quiz-2');
 /*!40000 ALTER TABLE `quizzes` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `resources`
+--
+
+DROP TABLE IF EXISTS `resources`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `resources` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL,
+  `link` varchar(150) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `resources`
+--
+
+LOCK TABLES `resources` WRITE;
+/*!40000 ALTER TABLE `resources` DISABLE KEYS */;
+/*!40000 ALTER TABLE `resources` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -197,7 +200,7 @@ CREATE TABLE `stud_assignment` (
 
 LOCK TABLES `stud_assignment` WRITE;
 /*!40000 ALTER TABLE `stud_assignment` DISABLE KEYS */;
-INSERT INTO `stud_assignment` VALUES (14,'https://res.cloudinary.com/titacms/image/upload/v1619013247/g3tzpbcdjd3vgiet5hrs.pdf',19103057,'2021-04-21 19:24:01');
+INSERT INTO `stud_assignment` VALUES (17,'https://res.cloudinary.com/titacms/image/upload/v1619184977/clcnp7bkecta8rl3wzwb.pdf',19103057,'2021-04-23 19:06:13'),(18,'https://res.cloudinary.com/titacms/image/upload/v1619184997/bcfmjftfad3ybj2hq5lj.pdf',19103057,'2021-04-23 19:06:31');
 /*!40000 ALTER TABLE `stud_assignment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -224,7 +227,7 @@ CREATE TABLE `stud_class` (
 
 LOCK TABLES `stud_class` WRITE;
 /*!40000 ALTER TABLE `stud_class` DISABLE KEYS */;
-INSERT INTO `stud_class` VALUES (19103057,29);
+INSERT INTO `stud_class` VALUES (19103057,29),(19103057,33),(19103057,33),(19103057,33),(19103057,33),(19103057,33),(19103057,33),(19103057,33),(19103057,33),(19103057,33),(19103057,33),(19103057,33),(19103057,33),(19103057,33),(19103057,34),(19103057,37);
 /*!40000 ALTER TABLE `stud_class` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -268,7 +271,7 @@ CREATE TABLE `sub_class` (
   PRIMARY KEY (`sub_class_id`),
   KEY `class_id` (`class_id`),
   CONSTRAINT `sub_class_ibfk_1` FOREIGN KEY (`class_id`) REFERENCES `classrooms` (`classroom_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -277,7 +280,7 @@ CREATE TABLE `sub_class` (
 
 LOCK TABLES `sub_class` WRITE;
 /*!40000 ALTER TABLE `sub_class` DISABLE KEYS */;
-INSERT INTO `sub_class` VALUES (27,'dltpntgc',1),(28,'dltpntgc',2),(29,'dltpntgc',3),(30,'dltpntgc',4),(31,'dltpntgc',5),(32,'dltpntgc',6);
+INSERT INTO `sub_class` VALUES (27,'dltpntgc',1),(28,'dltpntgc',2),(29,'dltpntgc',3),(30,'dltpntgc',4),(31,'dltpntgc',5),(32,'dltpntgc',6),(33,'nfvwyzqb',1),(34,'nfvwyzqb',2),(35,'fysoirzb',1),(36,'fysoirzb',2),(37,'fysoirzb',3),(38,'fysoirzb',4),(39,'fysoirzb',5),(40,'fysoirzb',6);
 /*!40000 ALTER TABLE `sub_class` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -330,7 +333,7 @@ CREATE TABLE `teach_class` (
 
 LOCK TABLES `teach_class` WRITE;
 /*!40000 ALTER TABLE `teach_class` DISABLE KEYS */;
-INSERT INTO `teach_class` VALUES (6,27),(6,28),(6,29),(6,30),(6,31),(6,32);
+INSERT INTO `teach_class` VALUES (6,27),(6,28),(6,29),(6,30),(6,31),(6,32),(6,33),(6,34),(6,35),(6,36),(6,37),(6,38),(6,39),(6,40);
 /*!40000 ALTER TABLE `teach_class` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -399,4 +402,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-04-22 11:09:43
+-- Dump completed on 2021-04-23 22:39:13
