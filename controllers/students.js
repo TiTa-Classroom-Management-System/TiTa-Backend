@@ -284,7 +284,7 @@ const getResource = (req, res) => {
   const email = req.params.email;
   const classroom_id=req.params.id;
   db.query(
-    "SELECT id, name, link FROM resources WHERE id in (SELECT resource_id FROM sub_resources WHERE sub_class_id IN (SELECT A.sub_class_id FROM (SELECT sub_class_id FROM sub_class WHERE class_id=?) A INNER JOIN (SELECT sub_class_id FROM stud_class WHERE sid IN (SELECT sid FROM students WHERE email=?)) B ON A.sub_class_id=B.sub_class_id))",
+    "SELECT id, name, link, description, uploaded_at FROM resources WHERE id in (SELECT resource_id FROM sub_resources WHERE sub_class_id IN (SELECT A.sub_class_id FROM (SELECT sub_class_id FROM sub_class WHERE class_id=?) A INNER JOIN (SELECT sub_class_id FROM stud_class WHERE sid IN (SELECT sid FROM students WHERE email=?)) B ON A.sub_class_id=B.sub_class_id))",
     [classroom_id, email],
     (err, results, fields) => {
       if(err) throw new Error(err);

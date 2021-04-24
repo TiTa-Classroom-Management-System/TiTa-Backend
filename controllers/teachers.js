@@ -176,7 +176,7 @@ const getResource = (req, res) => {
   const classid = req.params.classid;
   console.log(classid)
   db.query(
-    "SELECT id, name, link FROM resources WHERE id IN (SELECT resource_id FROM sub_resources WHERE sub_class_id IN (SELECT sub_class_id FROM sub_class WHERE class_id = ? ))",
+    "SELECT id, name, link, description, uploaded_at FROM resources WHERE id IN (SELECT resource_id FROM sub_resources WHERE sub_class_id IN (SELECT sub_class_id FROM sub_class WHERE class_id = ? ))",
     [classid],
     (err, results, fields) => {
       if(err) throw new Error(err);
