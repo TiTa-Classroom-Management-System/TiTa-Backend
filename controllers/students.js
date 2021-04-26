@@ -140,8 +140,59 @@ const getQuiz = (req, res) => {
   const email = req.params.email;
   const classroom_id=req.params.id;
   db.query(
-    "SELECT quiz_id, quiz_name, start_time, end_time, quiz_link FROM quizzes WHERE quiz_id in (SELECT quiz_id FROM quiz_subclass WHERE sub_class_id IN (SELECT A.sub_class_id FROM (SELECT sub_class_id FROM sub_class WHERE class_id=?) A INNER JOIN (SELECT sub_class_id FROM stud_class WHERE sid IN (SELECT sid FROM students WHERE email=?)) B ON A.sub_class_id=B.sub_class_id))",
-    [classroom_id, email],
+    `SELECT
+      quiz_id,
+      quiz_name,
+      start_time,
+      end_time,
+      quiz_link,
+      score_obtained,
+      max_score
+    FROM (SELECT
+      sid,
+      X.sub_class_id,
+      class_id
+    FROM stud_class X
+    JOIN sub_class Y
+      ON X.sub_class_id = Y.sub_class_id
+    WHERE class_id = ?
+    AND sid IN (SELECT
+      sid
+    FROM students
+    WHERE email = ?)) A
+    RIGHT JOIN (SELECT
+      Y.quiz_id,
+      sid,
+      submitted_at,
+      score_obtained,
+      max_score,
+      quiz_name,
+      start_time,
+      end_time,
+      quiz_link
+    FROM (SELECT
+      *
+    FROM quiz_result
+    WHERE sid IN (SELECT
+      sid
+    FROM students
+    WHERE email = ?)) X
+    RIGHT JOIN (SELECT
+      *
+    FROM quizzes
+    WHERE quiz_id IN (SELECT
+      quiz_id
+    FROM quiz_subclass
+    WHERE sub_class_id IN (SELECT
+      sub_class_id
+    FROM stud_class
+    WHERE sid IN (SELECT
+      sid
+    FROM students
+    WHERE email = ?)))) Y
+      ON X.quiz_id = Y.quiz_id) B
+      ON A.sid = B.sid`,
+    [classroom_id, email, email, email],
     (err, results, fields) => {
       if(err) throw new Error(err);
       console.log(results);
