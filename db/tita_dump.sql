@@ -98,6 +98,36 @@ INSERT INTO `classrooms` VALUES ('dltpntgc','Computer Networks','CSN-210',6,'CSE
 UNLOCK TABLES;
 
 --
+-- Table structure for table `quiz_result`
+--
+
+DROP TABLE IF EXISTS `quiz_result`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `quiz_result` (
+  `quiz_id` int NOT NULL,
+  `sid` int NOT NULL,
+  `submitted_at` datetime DEFAULT NULL,
+  `score_obtained` float DEFAULT NULL,
+  `max_score` int DEFAULT NULL,
+  KEY `quiz_id` (`quiz_id`),
+  KEY `sid` (`sid`),
+  CONSTRAINT `quiz_result_ibfk_1` FOREIGN KEY (`quiz_id`) REFERENCES `quizzes` (`quiz_id`),
+  CONSTRAINT `quiz_result_ibfk_2` FOREIGN KEY (`sid`) REFERENCES `students` (`sid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `quiz_result`
+--
+
+LOCK TABLES `quiz_result` WRITE;
+/*!40000 ALTER TABLE `quiz_result` DISABLE KEYS */;
+INSERT INTO `quiz_result` VALUES (1,19103057,'2021-04-24 07:31:10',15,20),(1,19103199,'2021-04-24 03:17:33',12,20),(1,19103145,'2021-04-24 02:58:00',14,20),(1,19103154,'2021-04-24 02:57:59',18,20),(1,19103176,'2021-04-24 02:59:29',20,20);
+/*!40000 ALTER TABLE `quiz_result` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `quiz_subclass`
 --
 
@@ -229,7 +259,7 @@ CREATE TABLE `stud_class` (
 
 LOCK TABLES `stud_class` WRITE;
 /*!40000 ALTER TABLE `stud_class` DISABLE KEYS */;
-INSERT INTO `stud_class` VALUES (19103057,29),(19103057,33),(19103057,33),(19103057,33),(19103057,33),(19103057,33),(19103057,33),(19103057,33),(19103057,33),(19103057,33),(19103057,33),(19103057,33),(19103057,33),(19103057,33),(19103057,34),(19103057,37);
+INSERT INTO `stud_class` VALUES (19103057,29),(19103057,33),(19103057,33),(19103057,33),(19103057,33),(19103057,33),(19103057,33),(19103057,33),(19103057,33),(19103057,33),(19103057,33),(19103057,33),(19103057,33),(19103057,33),(19103057,34),(19103057,37),(19103145,27),(19103154,27),(19103176,28),(19103199,28);
 /*!40000 ALTER TABLE `stud_class` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -255,7 +285,7 @@ CREATE TABLE `students` (
 
 LOCK TABLES `students` WRITE;
 /*!40000 ALTER TABLE `students` DISABLE KEYS */;
-INSERT INTO `students` VALUES (19103057,'Shubh Ashish','shubhashish.bt19cse@pec.edu.in');
+INSERT INTO `students` VALUES (19103057,'Shubh Ashish','shubhashish.bt19cse@pec.edu.in'),(19103145,'Keanu Reeves','keanu.bt19cse@pec.edu.in'),(19103154,'Smart admi','smartadmi.bt19cse@pec.edu.in'),(19103176,'Zyada Smart admi','zyadasmartadmi.bt19cse@pec.edu.in'),(19103199,'John Doe','johndoe.bt19cse@pec.edu.in');
 /*!40000 ALTER TABLE `students` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -404,4 +434,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-04-24  9:39:49
+-- Dump completed on 2021-04-26 11:26:29

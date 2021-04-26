@@ -1,4 +1,6 @@
 const db = require("../db/db");
+const csv = require("csv-parser");
+const fs = require("fs");
 
 const login = (req, res) => {
   const { email, name } = req.body;
@@ -137,6 +139,55 @@ const getQuiz = (req, res) => {
   );
 };
 
+const uploadQuizResult = (req, res) =>
+{
+  const quiz_id = req.params.quizid;
+  console.log(req.params);
+  const quiz_results = [];
+  console.log(req.files);
+  let quiz_result = req.files.quiz_result;
+  console.log(quiz_result);
+  fs.createReadStream(quiz_result.tempFilePath)
+  .pipe(csv())
+  .on("data", (data) => quiz_results.push(data))
+  .on("end", () =>
+  {
+    quiz_results.forEach((r) =>
+    {
+      db.query(`SELECT * FROM quiz_result WHERE quiz_id = ? AND sid IN (SELECT sid FROM students WHERE email = ?)`,
+      [quiz_id, r.Email],
+      (err, results, fields) =>
+      {
+        if(results.length === 0)
+        {
+          db.query(`SELECT sid FROM students WHERE email = ?`,
+          [r.Email],
+          (err, results, fields) =>
+          {
+            if(results.length)
+            {
+              // console.log(r.Timestamp.slice(0, 10).split("/"));
+              const sid = results[0].sid;
+              const submitted_at_date = `${r.Timestamp.slice(0, 10).split("/")[0]}-${r.Timestamp.slice(0, 10).split("/")[1]}-${r.Timestamp.slice(0, 10).split("/")[2]}`;
+              const submitted_at_time = r.Timestamp.slice(11, 18);
+              const score_obtained = parseFloat(r[`Total score`].split(" / ")[0]);
+              const max_score = parseInt(r[`Total score`].split(" / ")[1]);
+
+              db.query(`INSERT INTO quiz_result (quiz_id, sid, submitted_at, score_obtained, max_score) VALUES (?, ?, ?, ?, ?)`,
+              [quiz_id, sid, `${submitted_at_date} ${submitted_at_time}`, score_obtained, max_score],
+              (err, results, fields) =>
+              {
+                if(err) throw new Error(err);
+              });
+            }
+          });
+        }
+      })
+    })
+  });
+  res.send("Added score to DB.");
+}
+
 const getAssignment = (req, res) => {
   const classid = req.params.classid;
   console.log(classid)
@@ -186,4 +237,4 @@ const getResource = (req, res) => {
 }
 
 
-module.exports = { login, getTimeTable, getClassrooms, getQuiz, getAssignment, getSolvedAssignment, getResource };
+module.exports = { login, getTimeTable, getClassrooms, getQuiz, uploadQuizResult, getAssignment, getSolvedAssignment, getResource };

@@ -9,8 +9,9 @@ cloudinary.config({
 
 exports.upload=async (req,res,next)=>{
     console.log('cloudinary',req.body);
+    console.log(req.files);
     try{
-        let result=await cloudinary.uploader.upload(req.files.file.tempFilePath,{
+        let result=await cloudinary.uploader.upload(req.files.assignment_file.tempFilePath,{
             use_filename:true,
             resource_type:'auto' 
         });
@@ -22,13 +23,6 @@ exports.upload=async (req,res,next)=>{
         next();
     }
     catch(err){
-        // throw new Error(err);
         next(err)
     }
-    
-    // res.json({
-    //     public_id:result.public_id,
-    //     url:result.secure_url,
-    // })
-    
 }
