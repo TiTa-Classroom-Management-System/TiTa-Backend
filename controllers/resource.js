@@ -4,7 +4,6 @@ const{upload}=require("../controllers/cloudinary");
 
 const createResource = (req, res) => {
     let { classroom_id, subGroups, resource_name, link, description, uploaded_at } = req.body;
-    console.log('link',resource_name,link);
     db.query(
         "INSERT INTO resources (name, link, description, uploaded_at) VALUES (?, ?, ?, ?)",
         [resource_name, link, description, uploaded_at],

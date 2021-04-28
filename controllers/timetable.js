@@ -1,7 +1,6 @@
 const db = require("../db/db");
 
 const createTimetable = async (req, res) => {
-  // Data from frontend: class_id, group_number, start_time, end_time, day, type
   const { class_id, group_number, start_time, end_time, day, type } = req.body;
   var sub_class_id = 0;
   db.query(
@@ -12,8 +11,6 @@ const createTimetable = async (req, res) => {
         throw new Error();
       }
       sub_class_id = results[0].sub_class_id;
-      console.log(sub_class_id);
-
       db.query(
         "SELECT * FROM timetable WHERE sub_class_id = ? AND start_time = ? AND day = ?",
         [sub_class_id, start_time, day],

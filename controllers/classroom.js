@@ -59,16 +59,13 @@ const createClassRoom = async (req, res) => {
                                                 [classroom_id],
                                                 (err, results, fields) => {
                                                     if (err) {
-                                                        throw new Error(
-                                                            err
-                                                        );
+                                                        throw new Error(err);
                                                     }
                                                     db.query(
                                                         "INSERT INTO teach_class(tid, sub_class_id) VALUES (?, ?)",
                                                         [
                                                             tid,
-                                                            results[i - 1]
-                                                                .sub_class_id,
+                                                            results[i - 1].sub_class_id,
                                                         ],
                                                         (
                                                             err,
@@ -76,9 +73,7 @@ const createClassRoom = async (req, res) => {
                                                             fields
                                                         ) => {
                                                             if (err) {
-                                                                throw new Error(
-                                                                    err
-                                                                );
+                                                                throw new Error(err);
                                                             }
                                                         }
                                                     );
@@ -121,7 +116,6 @@ const getClassroom = async (req, res) => {
 
 const joinClassroom = async (req, res) => {
     const { classid, email, selected_grp_no } = req.body;
-    console.log(classid, email, selected_grp_no);
     db.query(
         "SELECT sub_class_id FROM sub_class WHERE class_id=? AND grp_no=?",
         [classid, selected_grp_no],
@@ -129,7 +123,6 @@ const joinClassroom = async (req, res) => {
             if (err) {
                 throw new Error(err);
             }
-            console.log(results);
             const sub_class_id = results[0].sub_class_id;
             db.query(
                 "SELECT sid FROM students WHERE email=?",

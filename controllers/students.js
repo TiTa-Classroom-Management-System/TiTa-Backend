@@ -10,7 +10,6 @@ const login = (req, res) => {
         throw new Error(err);
       }
       if (results.length === 0) {
-        console.log(name.substr(2, 10), name.substr(11), email);
         db.query(
           "INSERT INTO students (sid, name, email) VALUES (?, ?, ?)",
           [parseInt(name.substr(2, 10)), name.substr(11), email],
@@ -190,7 +189,6 @@ const getQuiz = (req, res) => {
     [email, email, classroom_id],
     (err, results, fields) => {
       if(err) throw new Error(err);
-      console.log(results);
       res.status(200).send(results);
     }
   );
@@ -225,7 +223,6 @@ const getAllQuizzes = (req, res) =>
 const getAssignment = (req, res) => {
   const email = req.params.email;
   const classroom_id=req.params.id;
-  console.log(classroom_id, email);
   db.query(
     `SELECT X.assignment_id, assignment_name, submission_date, assignment_link, solution_link, submitted_at FROM (SELECT *
     FROM assignment
@@ -250,7 +247,6 @@ const getAssignment = (req, res) => {
     ,[classroom_id, email, email],
     (err, results, fields) => {
       if(err) throw new Error(err);
-      console.log(results)
       res.status(200).send(results);
     }
   );
@@ -310,15 +306,12 @@ const submitAssignment=(req,res)=>{
     "SELECT sid FROM students WHERE email=?", [email],
     (err, results, fields) => {
       if(err) throw new Error(err);
-      console.log(results)
       const sid=results[0].sid;
-      console.log(sid)
       db.query(
         "INSERT INTO stud_assignment (assignment_id, assignment_link, sid, submitted_at) VALUES (?, ?, ?, ?)"
         ,[assignment_id, link, sid, submitted_at],
         (err, results, fields) => {
           if(err) throw new Error(err);
-          console.log(results)
           res.status(200).send(results);
         }
       );
@@ -334,7 +327,6 @@ const getResource = (req, res) => {
     [classroom_id, email],
     (err, results, fields) => {
       if(err) throw new Error(err);
-      console.log(results);
       res.status(200).send(results);
     }
   );
