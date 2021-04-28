@@ -46,4 +46,15 @@ const createQuiz = (req, res) => {
     );
 }
 
-module.exports = { createQuiz };
+const getQuizResult = (req, res) =>
+{
+    let { quiz_id } = req.params;
+    db.query(`SELECT email, score_obtained, max_score FROM quiz_result X JOIN (SELECT sid, email FROM students) Y ON X.sid = Y.sid WHERE quiz_id = ?`,
+    [quiz_id],
+    (err, results, fields) =>
+    {
+        res.status(200).send(results);
+    })
+}
+
+module.exports = { createQuiz, getQuizResult };
