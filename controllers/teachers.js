@@ -142,11 +142,8 @@ const getQuiz = (req, res) => {
 const uploadQuizResult = (req, res) =>
 {
   const quiz_id = req.params.quizid;
-  console.log(req.params);
   const quiz_results = [];
-  console.log(req.files);
   let quiz_result = req.files.quiz_result;
-  console.log(quiz_result);
   fs.createReadStream(quiz_result.tempFilePath)
   .pipe(csv())
   .on("data", (data) => quiz_results.push(data))
@@ -166,7 +163,6 @@ const uploadQuizResult = (req, res) =>
           {
             if(results.length)
             {
-              // console.log(r.Timestamp.slice(0, 10).split("/"));
               const sid = results[0].sid;
               const submitted_at_date = `${r.Timestamp.slice(0, 10).split("/")[0]}-${r.Timestamp.slice(0, 10).split("/")[1]}-${r.Timestamp.slice(0, 10).split("/")[2]}`;
               const submitted_at_time = r.Timestamp.slice(11, 18);
@@ -190,7 +186,6 @@ const uploadQuizResult = (req, res) =>
 
 const getAssignment = (req, res) => {
   const classid = req.params.classid;
-  console.log(classid)
   db.query(
     "SELECT assignment_id, assignment_name, creation_date, submission_date, assignment_link FROM assignment WHERE assignment_id IN (SELECT assignment_id FROM assignment_subclass WHERE sub_class_id IN (SELECT sub_class_id FROM sub_class WHERE class_id = ? ))",
     [classid],
@@ -203,7 +198,6 @@ const getAssignment = (req, res) => {
 
 const getSolvedAssignment = (req, res) => {
   const assignment_id = req.params.assignment_id;
-  console.log(assignment_id)
   db.query(
     "SELECT S.sid, name, assignment_link, submitted_at, submission_date FROM students S JOIN (SELECT * FROM (SELECT * FROM stud_assignment WHERE assignment_id = ?) A JOIN (SELECT assignment_id AS ass_id, submission_date FROM assignment WHERE assignment_id = ?) B ON A.assignment_id = B.ass_id ) T ON S.sid=T.sid;",
     [assignment_id, assignment_id],
@@ -212,7 +206,6 @@ const getSolvedAssignment = (req, res) => {
       try
       {
         const sid=results[0].sid;
-        console.log(sid,results)
         res.status(200).send(results);
       }
       catch
@@ -225,7 +218,6 @@ const getSolvedAssignment = (req, res) => {
 
 const getResource = (req, res) => {
   const classid = req.params.classid;
-  console.log(classid)
   db.query(
     "SELECT id, name, link, description, uploaded_at FROM resources WHERE id IN (SELECT resource_id FROM sub_resources WHERE sub_class_id IN (SELECT sub_class_id FROM sub_class WHERE class_id = ? ))",
     [classid],
