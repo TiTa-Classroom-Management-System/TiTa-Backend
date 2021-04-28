@@ -228,5 +228,17 @@ const getResource = (req, res) => {
   );
 }
 
+const getList = (req, res) => {
+  const classid = req.params.classid;
+  db.query(
+    "SELECT sid, name, email FROM students WHERE sid IN (SELECT sid FROM stud_class WHERE sub_class_id IN (SELECT sub_class_id FROM sub_class WHERE class_id = ?))",
+    [classid],
+    (err, results, fields) => {
+      if(err) throw new Error(err);
+      res.status(200).send(results);
+    }
+  );
+}
 
-module.exports = { login, getTimeTable, getClassrooms, getQuiz, uploadQuizResult, getAssignment, getSolvedAssignment, getResource };
+
+module.exports = { login, getTimeTable, getClassrooms, getQuiz, uploadQuizResult, getAssignment, getSolvedAssignment, getResource, getList };
