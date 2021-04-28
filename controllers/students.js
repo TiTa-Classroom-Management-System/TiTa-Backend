@@ -149,34 +149,25 @@ const getQuiz = (req, res) => {
       score_obtained,
       max_score
     FROM (SELECT
-      sid,
-      X.sub_class_id,
-      class_id
-    FROM stud_class X
-    JOIN sub_class Y
-      ON X.sub_class_id = Y.sub_class_id
-    WHERE class_id = ?
-    AND sid IN (SELECT
+      email,
       sid
-    FROM students
-    WHERE email = ?)) A
+    FROM students) T
     RIGHT JOIN (SELECT
-      Y.quiz_id,
-      sid,
-      submitted_at,
-      score_obtained,
-      max_score,
+      R.quiz_id,
       quiz_name,
       start_time,
       end_time,
-      quiz_link
+      quiz_link,
+      score_obtained,
+      max_score,
+      sid
     FROM (SELECT
       *
     FROM quiz_result
     WHERE sid IN (SELECT
       sid
     FROM students
-    WHERE email = ?)) X
+    WHERE email = ?)) Q
     RIGHT JOIN (SELECT
       *
     FROM quizzes
@@ -189,10 +180,14 @@ const getQuiz = (req, res) => {
     WHERE sid IN (SELECT
       sid
     FROM students
-    WHERE email = ?)))) Y
-      ON X.quiz_id = Y.quiz_id) B
-      ON A.sid = B.sid`,
-    [classroom_id, email, email, email],
+    WHERE email = ?))
+    AND sub_class_id IN (SELECT
+      sub_class_id
+    FROM sub_class
+    WHERE class_id = ?))) R
+      ON Q.quiz_id = R.quiz_id) U
+      ON T.sid = U.sid`,
+    [email, email, classroom_id],
     (err, results, fields) => {
       if(err) throw new Error(err);
       console.log(results);

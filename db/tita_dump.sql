@@ -123,7 +123,7 @@ CREATE TABLE `quiz_result` (
 
 LOCK TABLES `quiz_result` WRITE;
 /*!40000 ALTER TABLE `quiz_result` DISABLE KEYS */;
-INSERT INTO `quiz_result` VALUES (1,19103057,'2021-04-24 07:31:10',15,20),(1,19103199,'2021-04-24 03:17:33',12,20),(1,19103145,'2021-04-24 02:58:00',14,20),(1,19103154,'2021-04-24 02:57:59',18,20),(1,19103176,'2021-04-24 02:59:29',20,20);
+INSERT INTO `quiz_result` VALUES (4,19103057,'2021-04-24 07:31:10',20,20),(4,19103199,'2021-04-24 03:17:33',18,20),(4,19103145,'2021-04-24 02:58:00',14,20),(4,19103154,'2021-04-24 02:57:59',5,20),(4,19103176,'2021-04-24 02:59:29',7,20);
 /*!40000 ALTER TABLE `quiz_result` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -150,7 +150,7 @@ CREATE TABLE `quiz_subclass` (
 
 LOCK TABLES `quiz_subclass` WRITE;
 /*!40000 ALTER TABLE `quiz_subclass` DISABLE KEYS */;
-INSERT INTO `quiz_subclass` VALUES (1,27),(1,28),(1,29),(1,30),(1,32),(1,31),(1,27),(1,28),(1,29),(1,30),(1,31),(1,32),(1,27),(1,28),(1,29),(1,30),(1,31),(1,32),(4,27),(4,28),(4,29),(4,30),(4,31),(4,32),(5,33),(6,34);
+INSERT INTO `quiz_subclass` VALUES (4,27),(4,28),(4,29),(4,30),(4,31),(4,32),(5,33),(6,34),(7,27),(7,28),(7,29);
 /*!40000 ALTER TABLE `quiz_subclass` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -168,7 +168,7 @@ CREATE TABLE `quizzes` (
   `end_time` datetime NOT NULL,
   `quiz_link` varchar(150) NOT NULL,
   PRIMARY KEY (`quiz_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -177,7 +177,7 @@ CREATE TABLE `quizzes` (
 
 LOCK TABLES `quizzes` WRITE;
 /*!40000 ALTER TABLE `quizzes` DISABLE KEYS */;
-INSERT INTO `quizzes` VALUES (1,'Entertainment Quiz','2021-04-24 11:00:00','2021-04-24 11:40:00','https://docs.google.com/forms/d/e/1FAIpQLSfmiSooCOZGveysh7QQJCkd7Us1WSdY4ybaSAZV3ln7o6XNug/viewform?usp=sf_link'),(2,'Entertainment Quiz 1','2021-04-24 10:50:00','2021-04-24 11:00:00','https://docs.google.com/forms/d/e/1FAIpQLSfmiSooCOZGveysh7QQJCkd7Us1WSdY4ybaSAZV3ln7o6XNug/viewform?usp=sf_link'),(3,'Entertainment Quiz 2','2021-04-28 11:00:00','2021-04-28 12:00:00','https://docs.google.com/forms/d/e/1FAIpQLSfmiSooCOZGveysh7QQJCkd7Us1WSdY4ybaSAZV3ln7o6XNug/viewform?usp=sf_link'),(4,'Tathya General Quiz','2021-04-23 11:00:00','2021-04-23 12:00:00','https://docs.google.com/forms/d/e/1FAIpQLSf3H1el1gPhU-_lruUAWV5cfTnJVhoutL7Gouo0zF0jLaSPRQ/viewform?usp=sf_link'),(5,'Test Quiz','2021-04-24 16:00:00','2021-04-24 16:15:00','test-quiz.com'),(6,'Test Quiz 2','2021-04-25 14:50:00','2021-04-25 15:00:00','https://test-quiz-2');
+INSERT INTO `quizzes` VALUES (4,'Tathya General Quiz','2021-04-23 11:00:00','2021-04-23 12:00:00','https://docs.google.com/forms/d/e/1FAIpQLSf3H1el1gPhU-_lruUAWV5cfTnJVhoutL7Gouo0zF0jLaSPRQ/viewform?usp=sf_link'),(5,'Test Quiz','2021-04-24 16:00:00','2021-04-24 16:15:00','test-quiz.com'),(6,'Test Quiz 2','2021-04-25 14:50:00','2021-04-25 15:00:00','https://test-quiz-2'),(7,'Test Quiz for DLTPNTGC','2021-04-29 13:47:00','2021-04-29 14:07:00','https://docs.google.com/test/test');
 /*!40000 ALTER TABLE `quizzes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -259,7 +259,7 @@ CREATE TABLE `stud_class` (
 
 LOCK TABLES `stud_class` WRITE;
 /*!40000 ALTER TABLE `stud_class` DISABLE KEYS */;
-INSERT INTO `stud_class` VALUES (19103057,29),(19103057,33),(19103057,33),(19103057,33),(19103057,33),(19103057,33),(19103057,33),(19103057,33),(19103057,33),(19103057,33),(19103057,33),(19103057,33),(19103057,33),(19103057,33),(19103057,34),(19103057,37),(19103145,27),(19103154,27),(19103176,28),(19103199,28);
+INSERT INTO `stud_class` VALUES (19103057,29),(19103057,34),(19103057,37),(19103145,27),(19103154,27),(19103176,28),(19103199,28);
 /*!40000 ALTER TABLE `stud_class` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -434,4 +434,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-04-26 11:26:29
+-- Dump completed on 2021-04-28 10:21:20
