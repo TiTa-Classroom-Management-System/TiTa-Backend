@@ -59,9 +59,21 @@ MYSQL_USER=<your_mysql_user>
 
 MYSQL_PASS=<your_mysql_password>
 
-```
+CLOUDINARY_CLOUD_NAME=<your_cloudinary_name>
 
-  
+CLOUDINARY_API_KEY=<your_cloudinary_api_key>
+
+CLOUDINARY_API_SECRET=<your_cloudinary_api_secret>
+
+```
+### Setting up cloudinary
+
+
+Head over to [Cloudinary](https://cloudinary.com/).<br/>
+Create your account.<br/>
+Replace the above environment values with your credentials.
+
+
 
 ### Setting up your database
 
